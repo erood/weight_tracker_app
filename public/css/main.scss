@@ -8,6 +8,17 @@
 // Scaffolding
 // -------------------------
 
+#progress_container {
+  margin: 40px 0 20px;
+  width: 100%;
+  height: 20px;
+  position: relative;
+}
+
+.progressbar-text {
+  text-align: center;
+}
+
 html {
   position: relative;
   min-height: 100%;
