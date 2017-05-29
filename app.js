@@ -36,7 +36,7 @@ const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
 /*addition to boilerplate*/
-const weightController = require('./controllers/weight');
+const weightController = require('./controllers/home');
 const goalController = require('./controllers/home');
 
 
@@ -142,8 +142,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 
 
 /*primary - additions to boilerplate*/
-app.get('/weights', passportConfig.isAuthenticated, weightController.getWeights);
-app.post('/weights', passportConfig.isAuthenticated, weightController.postWeights);
 
 app.get('/', passportConfig.isAuthenticated, goalController.getGoals);
 app.post('/', passportConfig.isAuthenticated, goalController.postGoals);

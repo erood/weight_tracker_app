@@ -29,34 +29,50 @@ block content
         p
           a.btn.btn-default(href='#', role='button') View details »
   else
-    h1 Welcome User! [TEST]
+    h3 Welcome User! [TEST]
     head
       script(type='text/javascript').
         var CSRF_HEADER = 'x-csrf-token';
-        window.onload = function change_table() {
+        function change_table() {
+          /*goal piece*/
           //gettting json values
           var goals_json = document.getElementById("goals_json").value;
-          var goals_json_value1 = JSON.parse(goals_json );
+          var goals_json_value1 = JSON.parse(goals_json);
+          console.log(goals_json_value1.goal)
           var enter_goals = document.getElementById("enter_goals");
           var goal_weight = document.getElementById("goal_weight");
           var goal_date = document.getElementById("goal_date");
           //need count in here to take the last value entered in goals
-          var count = Object.keys(goals_json_value1).length;
+          var count = Object.keys(goals_json_value1.goal).length;
           //enter_goals.value = goals_json_value1[0].enter_goals;
-          goal_weight.value = goals_json_value1[count-1].goal_weight;
-          goal_date.value = goals_json_value1[count-1].goal_date;
-          //console.log(goals_json_value1[0].goal_date)
-          console.log(count)
-        }
+          goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
+          goal_date.value = goals_json_value1.goal[count-1].goal_date;
+          //console.log(goals_json_value1.goal.length)
 
+        };
+
+        function change_weight() {
+          /*weight piece*/
+          //gettting json values
+          var weight = document.getElementById("enter_weight_actual");
+          var date = document.getElementById("entry_date");
+          //need count in here to take the last value entered in goals
+          //enter_goals.value = goals_json_value1[0].enter_goals;
+          //console.log(weights_json_value1[0].weight)
+        };
+
+        window.onload = function start(){
+            change_table();
+            change_weight();
+        };
 
     .page-header
-      h3 Profile Information
-      input(type='hidden', id="goals_json", value= JSON.stringify(goals))
+      h3 Goal information
+      input(type='hidden', id="goals_json", value= JSON.stringify(locals))
 
     form.form-horizontal(action='/', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
+      //.form-group
         label.col-sm-3.control-label Enter Goals?
         .col-sm-6
           label.radio.col-sm-3
@@ -73,6 +89,24 @@ block content
         label.col-sm-3.control-label(for='website') Target Date:
         .col-sm-7
           input.form-control(type='date', name='goal_date', id='goal_date')
+      .form-group
+        .col-sm-offset-3.col-sm-4
+          button.btn.btn.btn-primary(type='submit')
+            i.fa.fa-pencil
+            | Update Profile
+
+    .page-header
+      h3 Weight information
+    form.form-horizontal(action='/', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-3.control-label(for='location') Weight entry:
+        .col-sm-7
+          input.form-control(type='number', name='enter_weight_actual', id='enter_weight_actual')
+      .form-group
+        label.col-sm-3.control-label(for='website') Target Date:
+        .col-sm-7
+          input.form-control(type='date', name='entry_date', id='entry_date')
       .form-group
         .col-sm-offset-3.col-sm-4
           button.btn.btn.btn-primary(type='submit')
