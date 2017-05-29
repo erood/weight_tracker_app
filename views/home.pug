@@ -40,9 +40,13 @@ block content
           var enter_goals = document.getElementById("enter_goals");
           var goal_weight = document.getElementById("goal_weight");
           var goal_date = document.getElementById("goal_date");
-          goal_date.value = goals_json_value1[0].goal_date;
-          console.log(goals_json_value1[0].goal_date)
-          console.log(goals_json)
+          //need count in here to take the last value entered in goals
+          var count = Object.keys(goals_json_value1).length;
+          //enter_goals.value = goals_json_value1[0].enter_goals;
+          goal_weight.value = goals_json_value1[count-1].goal_weight;
+          goal_date.value = goals_json_value1[count-1].goal_date;
+          //console.log(goals_json_value1[0].goal_date)
+          console.log(count)
         }
 
 
@@ -64,11 +68,11 @@ block content
       .form-group
         label.col-sm-3.control-label(for='location') Goal Weight:
         .col-sm-7
-          input.form-control(type='text', name='goal_weight', id='goal_weight')
+          input.form-control(type='number', name='goal_weight', id='goal_weight')
       .form-group
         label.col-sm-3.control-label(for='website') Target Date:
         .col-sm-7
-          input.form-control(type='text', name='goal_date', id='goal_date')
+          input.form-control(type='date', name='goal_date', id='goal_date')
       .form-group
         .col-sm-offset-3.col-sm-4
           button.btn.btn.btn-primary(type='submit')

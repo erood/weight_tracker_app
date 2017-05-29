@@ -27,6 +27,9 @@ exports.getGoals = (req, res) => {
  * Update profile information.
  */
  exports.postGoals = (req, res, next) => {
+     //req.assert('goal_weight', 'Please ensure employee type or role is correct').isNumber();
+     //req.assert('email', 'Please enter a valid email address.').isEmail();
+
      const errors = req.validationErrors();
 
      if (errors) {
