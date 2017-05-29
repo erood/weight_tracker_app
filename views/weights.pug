@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .page-header
+    h3 All Weights
+
+  ul
+    for weight in weights
+      li= weight.name
