@@ -30,26 +30,47 @@ block content
           a.btn.btn-default(href='#', role='button') View details »
   else
     h1 Welcome User! [TEST]
-    p.lead A boilerplate for Node.js web applications.
-    hr
-    .row
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
+    head
+      script(type='text/javascript').
+        var CSRF_HEADER = 'x-csrf-token';
+        window.onload = function change_table() {
+          //gettting json values
+          var goals_json = document.getElementById("goals_json").value;
+          var goals_json_value1 = JSON.parse(goals_json );
+          var enter_goals = document.getElementById("enter_goals");
+          var goal_weight = document.getElementById("goal_weight");
+          var goal_date = document.getElementById("goal_date");
+          goal_date.value = goals_json_value1[0].goal_date;
+          console.log(goals_json_value1[0].goal_date)
+          console.log(goals_json)
+        }
+
+
+    .page-header
+      h3 Profile Information
+      input(type='hidden', id="goals_json", value= JSON.stringify(goals))
+
+    form.form-horizontal(action='/', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-3.control-label Enter Goals?
+        .col-sm-6
+          label.radio.col-sm-3
+            input(type='radio', name='enter_goals', value='yes', data-toggle='radio')
+            span Yes
+          label.radio.col-sm-3
+            input(type='radio', name='enter_goals', value='no', data-toggle='radio')
+            span No
+      .form-group
+        label.col-sm-3.control-label(for='location') Goal Weight:
+        .col-sm-7
+          input.form-control(type='text', name='goal_weight', id='goal_weight')
+      .form-group
+        label.col-sm-3.control-label(for='website') Target Date:
+        .col-sm-7
+          input.form-control(type='text', name='goal_date', id='goal_date')
+      .form-group
+        .col-sm-offset-3.col-sm-4
+          button.btn.btn.btn-primary(type='submit')
+            i.fa.fa-pencil
+            | Update Profile

@@ -34,8 +34,11 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+
 /*addition to boilerplate*/
 const weightController = require('./controllers/weight');
+const goalController = require('./controllers/home');
+
 
 /**
  * API keys and Passport configuration.
@@ -119,7 +122,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
+//app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -137,8 +140,13 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+
 /*primary - additions to boilerplate*/
 app.get('/weights', passportConfig.isAuthenticated, weightController.getWeights);
+app.post('/weights', passportConfig.isAuthenticated, weightController.postWeights);
+
+app.get('/', passportConfig.isAuthenticated, goalController.getGoals);
+app.post('/', passportConfig.isAuthenticated, goalController.postGoals);
 
 
 /**

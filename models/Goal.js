@@ -1,0 +1,13 @@
+const mongoose = require('mongoose');
+
+const goalSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  enter_goals: String,
+  goal_weight: Number,
+  goal_date: String,
+
+}, { timestamps: true });
+
+const Goal = mongoose.model('Goal', goalSchema);
+module.exports = Goal;

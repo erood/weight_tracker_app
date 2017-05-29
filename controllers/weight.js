@@ -9,3 +9,13 @@ exports.getWeights = (req, res) => {
     res.render('weights', { weights: docs });
   });
 };
+
+/**
+ * POST /weights
+ * Skeleton for now.
+ */
+exports.postWeights = (req, res) => {
+  Weight.find((err, docs) => {
+    res.render('weights', { weights: docs });
+  });
+};
