@@ -40,16 +40,19 @@ block content
           var goals_json_value1 = JSON.parse(goals_json);
           console.log(goals_json_value1.goal)
           var enter_goals = document.getElementById("enter_goals");
+          var goal_start = document.getElementById("goal_start");
           var goal_weight = document.getElementById("goal_weight");
           var start_weight = document.getElementById("start_weight");
           var goal_date = document.getElementById("goal_date");
           //need count in here to take the last value entered in goals
           var count = Object.keys(goals_json_value1.goal).length;
           //enter_goals.value = goals_json_value1[0].enter_goals;
+          goal_start.value = (goals_json_value1.goal[count-1].createdAt).substring(0,10);
           goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
+
           start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
-          //console.log(goals_json_value1.goal.length)
+          console.log(goals_json_value1.goal)
 
         };
 
@@ -100,6 +103,10 @@ block content
             span No
       .form-group
         br
+        label.col-sm-3.control-label(for='location') Goal Start:
+        .col-sm-7
+          input.form-control(type='string' name='goal_start', id='goal_start')
+          br
         label.col-sm-3.control-label(for='location') Start Weight:
         .col-sm-7
           input.form-control(type='number', step="any", min="0" name='start_weight', id='start_weight')
@@ -115,7 +122,7 @@ block content
         .col-sm-offset-3.col-sm-4
           button.btn.btn.btn-primary(type='submit')
             i.fa.fa-pencil
-            | Update Profile
+            | Update Goals
 
     .page-header
       h4 Enter Weight
