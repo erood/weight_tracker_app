@@ -84,13 +84,32 @@ block content
           x.style.display = 'none';
             }
           }
+        function settings_show_hide() {
+          var x = document.getElementById('settings_form');
+          if (x.style.display === 'none') {
+          x.style.display = 'block';
+          } else {
+          x.style.display = 'none';
+            }
+          }
 
 
     .page-header
+    button(onclick='settings_show_hide()') Settings
+    form(style='display:none',id="settings_form").form-horizontal
+      br
+      label(for='weight_units') Select weight unit:
+          select#weight_units.form-control
+            option lbs
+            |
+            option kg
+            |
+          br
     button(onclick='goal_show_hide()') Edit Goals
 
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))
     form(style='display:none',id="goals_form").form-horizontal(action='/', method='POST')
+      br
       input(type='hidden', name='_csrf', value=_csrf)
       //.form-group
         label.col-sm-3.control-label Enter Goals?
@@ -105,7 +124,7 @@ block content
         br
         label.col-sm-3.control-label(for='location') Goal Start:
         .col-sm-7
-          input.form-control(type='string' name='goal_start', id='goal_start')
+          input.form-control(type='date' name='goal_start', id='goal_start')
           br
         label.col-sm-3.control-label(for='location') Start Weight:
         .col-sm-7
