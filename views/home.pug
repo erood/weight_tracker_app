@@ -31,6 +31,9 @@ block content
   else
     h3 Welcome User! [TEST]
     head
+      //jquery
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+      //functions
       script(type='text/javascript').
         var CSRF_HEADER = 'x-csrf-token';
         function change_table() {
@@ -44,14 +47,20 @@ block content
           var goal_weight = document.getElementById("goal_weight");
           var start_weight = document.getElementById("start_weight");
           var goal_date = document.getElementById("goal_date");
+          var units = document.getElementById('weight_units');
+
           //need count in here to take the last value entered in goals
           var count = Object.keys(goals_json_value1.goal).length;
           //enter_goals.value = goals_json_value1[0].enter_goals;
           goal_start.value = (goals_json_value1.goal[count-1].createdAt).substring(0,10);
           goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
-
           start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
+          units.value = goals_json_value1.goal[count-1].weight_units;
+          console.log(goals_json_value1.goal);
+          jQuery("label[for='start_weight_label']").html('Start Weight'+' ('+units.value+'):');
+          jQuery("label[for='goal_weight_label']").html('Goal Weight'+' ('+units.value+'):');
+          jQuery("label[for='weight_label']").html('Weight'+' ('+units.value+'):');
           //console.log(goals_json_value1.goal)
 
         };
@@ -72,6 +81,9 @@ block content
         window.onload = function start(){
             change_table();
             change_weight();
+
+
+
             //if goals blank, will need to run goal_show_hide() and prompt to enter goals
             //goal_show_hide();
         };
@@ -93,18 +105,8 @@ block content
             }
           }
 
-
     .page-header
-    button(onclick='settings_show_hide()') Settings
-    form(style='display:none',id="settings_form").form-horizontal
-      br
-      label(for='weight_units') Select weight unit:
-          select#weight_units.form-control
-            option lbs
-            |
-            option kg
-            |
-          br
+    br
     button(onclick='goal_show_hide()') Edit Goals
 
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))
@@ -120,17 +122,25 @@ block content
           label.radio.col-sm-3
             input(type='radio', name='enter_goals', value='no', data-toggle='radio')
             span No
+
       .form-group
-        br
+        label.col-sm-3.control-label(for='select_weight') Select units:
+        .col-sm-2
+          select.form-control(type = 'text', name='weight_units', id='weight_units')
+            option lbs
+            |
+            option kg
+            |
+      .form-group
         label.col-sm-3.control-label(for='location') Goal Start:
         .col-sm-7
           input.form-control(type='date' name='goal_start', id='goal_start')
-          br
-        label.col-sm-3.control-label(for='location') Start Weight:
+      .form-group
+        label.col-sm-3.control-label(for='start_weight_label')
         .col-sm-7
           input.form-control(type='number', step="any", min="0" name='start_weight', id='start_weight')
-          br
-        label.col-sm-3.control-label(for='location') Goal Weight:
+      .form-group
+        label.col-sm-3.control-label(for='goal_weight_label')
         .col-sm-7
           input.form-control(type='number', step="any", min="0" name='goal_weight', id='goal_weight')
       .form-group
@@ -145,10 +155,11 @@ block content
 
     .page-header
       h4 Enter Weight
+    br
     form.form-horizontal(action='/', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-3.control-label(for='location') Weight:
+        label.col-sm-3.control-label(for='weight_label')
         .col-sm-7
           input.form-control(type='number', step="any", min="0", name='enter_weight_actual', id='enter_weight_actual')
       .form-group
@@ -160,6 +171,7 @@ block content
           button.btn.btn.btn-primary(type='submit')
             i.fa.fa-pencil
             | Update Profile
+    br
     #progress_container
       script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
       script.

@@ -7,6 +7,8 @@ const goalSchema = new mongoose.Schema({
   goal_weight: Number,
   start_weight: Number,
   goal_date: String,
+  weight_units: String,
+
 
 }, { timestamps: true });
 

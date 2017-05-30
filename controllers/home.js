@@ -81,6 +81,7 @@ exports.getGoals = (req, res, next) => {
        goal_weight: req.body.goal_weight,
        start_weight: req.body.start_weight,
        goal_date: req.body.goal_date,
+       weight_units: req.body.weight_units,
      });
 
      goal.save((err) => {
