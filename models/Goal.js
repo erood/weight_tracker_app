@@ -5,6 +5,7 @@ const goalSchema = new mongoose.Schema({
   email: String,
   enter_goals: String,
   goal_weight: Number,
+  start_weight: Number,
   goal_date: String,
 
 }, { timestamps: true });

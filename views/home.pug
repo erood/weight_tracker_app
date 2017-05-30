@@ -41,11 +41,13 @@ block content
           console.log(goals_json_value1.goal)
           var enter_goals = document.getElementById("enter_goals");
           var goal_weight = document.getElementById("goal_weight");
+          var start_weight = document.getElementById("start_weight");
           var goal_date = document.getElementById("goal_date");
           //need count in here to take the last value entered in goals
           var count = Object.keys(goals_json_value1.goal).length;
           //enter_goals.value = goals_json_value1[0].enter_goals;
           goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
+          start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
           //console.log(goals_json_value1.goal.length)
 
@@ -55,22 +57,37 @@ block content
           /*weight piece*/
           //gettting json values
           var weight = document.getElementById("enter_weight_actual");
-          var date = document.getElementById("entry_date");
+          //var date = document.getElementById("entry_date");
           //need count in here to take the last value entered in goals
           //enter_goals.value = goals_json_value1[0].enter_goals;
           //console.log(weights_json_value1[0].weight)
+
+          //default entry date to show today
+          document.getElementById("entry_date").valueAsDate = new Date()
         };
 
         window.onload = function start(){
             change_table();
             change_weight();
+            //if goals blank, will need to run goal_show_hide() and prompt to enter goals
+            //goal_show_hide();
         };
 
-    .page-header
-      h3 Goal information
-      input(type='hidden', id="goals_json", value= JSON.stringify(locals))
+        function goal_show_hide() {
+          var x = document.getElementById('goals_form');
+          if (x.style.display === 'none') {
+          x.style.display = 'block';
+          } else {
+          x.style.display = 'none';
+            }
+          }
 
-    form.form-horizontal(action='/', method='POST')
+
+    .page-header
+    button(onclick='goal_show_hide()') Edit Goals
+
+      input(type='hidden', id="goals_json", value= JSON.stringify(locals))
+    form(style='display:none',id="goals_form").form-horizontal(action='/', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       //.form-group
         label.col-sm-3.control-label Enter Goals?
@@ -82,9 +99,14 @@ block content
             input(type='radio', name='enter_goals', value='no', data-toggle='radio')
             span No
       .form-group
+        br
+        label.col-sm-3.control-label(for='location') Start Weight:
+        .col-sm-7
+          input.form-control(type='number', step="any", min="0" name='start_weight', id='start_weight')
+          br
         label.col-sm-3.control-label(for='location') Goal Weight:
         .col-sm-7
-          input.form-control(type='number', name='goal_weight', id='goal_weight')
+          input.form-control(type='number', step="any", min="0" name='goal_weight', id='goal_weight')
       .form-group
         label.col-sm-3.control-label(for='website') Target Date:
         .col-sm-7
@@ -96,15 +118,15 @@ block content
             | Update Profile
 
     .page-header
-      h3 Weight information
+      h4 Enter Weight
     form.form-horizontal(action='/', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-3.control-label(for='location') Weight entry:
+        label.col-sm-3.control-label(for='location') Weight:
         .col-sm-7
           input.form-control(type='number', name='enter_weight_actual', id='enter_weight_actual')
       .form-group
-        label.col-sm-3.control-label(for='website') Target Date:
+        label.col-sm-3.control-label(for='website') Date:
         .col-sm-7
           input.form-control(type='date', name='entry_date', id='entry_date')
       .form-group
@@ -147,4 +169,6 @@ block content
           bar.setText(Math.round(bar.value() * 100) + ' %');
           }
           });
+          bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+          bar.text.style.fontSize = '2rem';
           bar.animate(1.0);  // Number from 0.0 to 1.0

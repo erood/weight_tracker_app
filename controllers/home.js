@@ -79,6 +79,7 @@ exports.getGoals = (req, res, next) => {
        email: req.user.email,
        enter_goals: req.body.enter_goals,
        goal_weight: req.body.goal_weight,
+       start_weight: req.body.start_weight,
        goal_date: req.body.goal_date,
      });
 
