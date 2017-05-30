@@ -38,7 +38,7 @@ block content
           //gettting json values
           var goals_json = document.getElementById("goals_json").value;
           var goals_json_value1 = JSON.parse(goals_json);
-          console.log(goals_json_value1.goal)
+          //console.log(goals_json_value1.goal)
           var enter_goals = document.getElementById("enter_goals");
           var goal_start = document.getElementById("goal_start");
           var goal_weight = document.getElementById("goal_weight");
@@ -52,7 +52,7 @@ block content
 
           start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
-          console.log(goals_json_value1.goal)
+          //console.log(goals_json_value1.goal)
 
         };
 
@@ -131,7 +131,7 @@ block content
       .form-group
         label.col-sm-3.control-label(for='location') Weight:
         .col-sm-7
-          input.form-control(type='number', name='enter_weight_actual', id='enter_weight_actual')
+          input.form-control(type='number', step="any", min="0", name='enter_weight_actual', id='enter_weight_actual')
       .form-group
         label.col-sm-3.control-label(for='website') Date:
         .col-sm-7
@@ -178,4 +178,4 @@ block content
           });
           bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
           bar.text.style.fontSize = '2rem';
-          bar.animate(1.0);  // Number from 0.0 to 1.0
+          bar.animate(0.8);  // Number from 0.0 to 1.0
