@@ -29,7 +29,7 @@ block content
         p
           a.btn.btn-default(href='#', role='button') View details »
   else
-    h3 Welcome User! [TEST]
+
     head
       //jquery
       script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
@@ -105,9 +105,9 @@ block content
             }
           }
 
-    .page-header
     br
-    button(onclick='goal_show_hide()') Edit Goals
+    br
+    btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
 
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))
     form(style='display:none',id="goals_form").form-horizontal(action='/', method='POST')
@@ -153,8 +153,11 @@ block content
             i.fa.fa-pencil
             | Update Goals
 
-    .page-header
-      h4 Enter Weight
+    br
+    br
+    br
+    br    
+    h4 Enter Weight
     br
     form.form-horizontal(action='/', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
