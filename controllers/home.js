@@ -123,6 +123,7 @@ exports.getGoals = (req, res, next) => {
         date: req.body.entry_date,
       });
 
+
       weight.save((err) => {
         /* this provides a block if the error is that hte email address is already associated with an employee*/
         if (err) {

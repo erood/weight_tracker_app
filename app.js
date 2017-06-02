@@ -142,10 +142,10 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 
 
 /*primary - additions to boilerplate*/
-
 app.get('/', passportConfig.isAuthenticated, goalController.getGoals);
-app.post('/', passportConfig.isAuthenticated, goalController.postGoals);
+app.post('/postGoals', passportConfig.isAuthenticated, goalController.postGoals);
 
+app.post('/postWeights', passportConfig.isAuthenticated, goalController.postWeights);
 
 /**
  * API examples routes.
