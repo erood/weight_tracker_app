@@ -230,6 +230,7 @@ block content
           bar.animate(0.8);  // Number from 0.0 to 1.0
     br
     br
+    br
     //this is where the chart will sit
     .div(id="tester")
     //plotly import, no account needed!
@@ -239,7 +240,7 @@ block content
       //console.log(db.weight.find().sort({"date":-1}));
       function get_pretty_date(value){
         var start_date = new Date(value)
-        start_date.setDate(start_date.getDate()+1);
+        //start_date.setDate(start_date.getDate()+1);
         var s_year = start_date.getFullYear();
         var s_month = start_date.getMonth()+1;
         if(s_month <= 9)
@@ -271,10 +272,10 @@ block content
           y: y_weight,
           marker: {
           color: 'rgb(33, 150, 243)',
-          size: 2,
+          size: 3,
           line: {
-          color: 'white',
-          width: 0.75
+          color: 'green',
+          width: 2
               }
           },
           type: "scatter",
@@ -284,6 +285,7 @@ block content
       var layout = {
         xaxis: {
           type: 'date',
+          title: 'Date',
           showgrid: false,
           zeroline: false,
           showline: false,
