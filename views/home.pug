@@ -269,16 +269,44 @@ block content
         {
           x: x_date,
           y: y_weight,
-          type: "scatter"
+          marker: {
+          color: 'rgb(33, 150, 243)',
+          size: 2,
+          line: {
+          color: 'white',
+          width: 0.75
+              }
+          },
+          type: "scatter",
         }
       ];
 
       var layout = {
         xaxis: {
           type: 'date',
+          showgrid: false,
+          zeroline: false,
+          showline: false,
+          mirror: 'ticks',
+          gridcolor: '#bdbdbd',
+          gridwidth: 2,
+          zerolinecolor: '#969696',
+          zerolinewidth: 4,
+          linecolor: '#636363',
+          linewidth: 2
 
         },yaxis: {
-          title: 'Weight'
+          title: 'Weight',
+          showgrid: false,
+          zeroline: false,
+          showline: false,
+          mirror: 'ticks',
+          gridcolor: '#bdbdbd',
+          gridwidth: 2,
+          zerolinecolor: '#969696',
+          zerolinewidth: 4,
+          linecolor: '#636363',
+          linewidth: 2
           },
           title:'Weight trend'
         };
