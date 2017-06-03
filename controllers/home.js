@@ -36,6 +36,7 @@ exports.getGoals = (req, res, next) => {
       },
 
       function(callback){
+        //used to sort weight by the log date (needed because a user can back date a weight entry making chart/log out of order)
         Weight.find(function (err, docs1) {
           if (err) { return next(err); }
           if (docs1 != null){
@@ -47,7 +48,7 @@ exports.getGoals = (req, res, next) => {
             callback();
           }
 
-        });
+        }).sort({"date":-1});
       },
 
   ];
