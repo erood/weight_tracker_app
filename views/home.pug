@@ -120,7 +120,14 @@ block content
           x.style.display = 'none';
             }
           }
+          function enter_goals() {
+            document.getElementById("goals_form").submit();
 
+          }
+          function enter_weight() {
+          document.getElementById("weight_form").submit();
+
+          }
     br
     br
     btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
@@ -165,16 +172,15 @@ block content
           input.form-control(type='date', name='goal_date', id='goal_date')
       .form-group
         .col-sm-offset-3.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            i.fa.fa-pencil
-            | Update Goals
+          #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
 
     br
     br
     br
     h4 Enter Weight
     br
-    form.form-horizontal(action='/postWeights', method='POST')
+    br
+    form.form-horizontal(id="weight_form", action='/postWeights', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
         label.col-sm-3.control-label(for='weight_label')
@@ -186,9 +192,7 @@ block content
           input.form-control(type='date', name='entry_date', id='entry_date')
       .form-group
         .col-sm-offset-3.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            i.fa.fa-pencil
-            | Update Profile
+          #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_weight()') Enter Weight
     br
     #progress_container
       script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
