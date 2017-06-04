@@ -323,7 +323,7 @@ block content
     script.
 
       //***all time average//***
-      
+
       var total = 0;
       for(var i = 0; i < goals_json_value1.weight.length; i++) {
         total += goals_json_value1.weight[i].weight;
@@ -370,19 +370,19 @@ block content
 
       var total_month = 0;
       var count_month = 0;
-      for(var k = 0; k < goals_json_value1.weight.length; j++) {
+      for(var k = 0; k < goals_json_value1.weight.length; k++) {
 
         if(goals_json_value1.weight[k].date >= (m)){
           total_month += goals_json_value1.weight[k].weight;
           count_month += 1;
-          //console.log(count_month);
-          //console.log(goals_json_value1.weight[k].date);
-          //console.log(goals_json_value1.weight[k].weight);
+          console.log(count_month);
+          console.log(goals_json_value1.weight[k].date);
+          console.log(goals_json_value1.weight[k].weight);
         }
         else {
-          total_week += 0;
+          total_month += 0;
           //console.log(goals_json_value1.weight[j].date);
-          //console.log(week_cutoff.setDate(week_cutoff.getDate()+7));
+          //console.log(month_cutoff.setDate(month_cutoff.getDate()+7));
         }
       }
       var month_avg = total_month / count_month;
