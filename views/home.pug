@@ -75,9 +75,10 @@ block content
           else {
             jQuery("label[for='goal_weight_label']").html('Goal Weight:')
           }
-
+          //Weight label form
           jQuery("label[for='weight_label']").html('Weight'+' ('+units.value+'):');
           //console.log(goals_json_value1.goal)
+
 
         };
 
@@ -177,7 +178,7 @@ block content
     br
     br
     br
-    h4 Enter Weight
+    h4 Enter weight
     br
     br
     form.form-horizontal(id="weight_form", action='/postWeights', method='POST')
@@ -193,6 +194,9 @@ block content
       .form-group
         .col-sm-offset-3.col-sm-4
           #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_weight()') Enter Weight
+    br
+    br
+    h4 Progress to goal
     br
     #progress_container
       script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
@@ -232,6 +236,44 @@ block content
           bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
           bar.text.style.fontSize = '2rem';
           bar.animate(0.8);  // Number from 0.0 to 1.0
+    br
+    br
+    br
+    br
+    h4 Summary statistics
+    br
+    .container
+      #lead_row.row
+        #Price_group.col-md-4
+          span(style='font-size:120%;color:black;')   7-day average:
+          br
+          span#week_avg.Price_num(style='font-size:110%;', <='', span='')
+        #Prev_wk_close.col-md-4
+          span(style='font-size:120%;color:black;')   10-day average:
+          br
+          span#month_avg.Prev_wk_close_num(style='font-size:110%;', <='', span='')
+        #wk_high.col-md-4
+          span(style='font-size:120%;color:black;')   All-time average:
+          br
+          span#all_time_avg(style='font-size:110%;', <='', span='')
+
+      // second row (first block blank for thicker price)
+      //#second_row.row
+        #Buffer.col-md-4
+          span
+          br
+          span
+        #Change.col-md-4
+          span(style='color:black;font-weight:bold;font-size:120%')   Change (% chg):
+          br
+          span#Change_num(style='font-size:110%;', <='', span='')
+        #wk_low.col-md-4
+          span(style='font-size:120%;color:black;font-weight:bold;')   52-wk Low:
+          br
+          span#52_wk_low(style='font-size:110%;', <='', span='')
+
+    br
+    br
     br
     br
     br
@@ -318,17 +360,17 @@ block content
         };
 
       Plotly.plot( TESTER, data, layout);
+    br
+    br
 
     //***weight summary stats//***
     script.
-
       //***all time average//***
-
       var total = 0;
       for(var i = 0; i < goals_json_value1.weight.length; i++) {
         total += goals_json_value1.weight[i].weight;
       }
-      var all_time_avg = total / goals_json_value1.weight.length;
+      var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
       console.log(all_time_avg);
 
 
@@ -357,7 +399,7 @@ block content
           //console.log(week_cutoff.setDate(week_cutoff.getDate()+7));
         }
       }
-      var week_avg = total_week / count_week;
+      var week_avg = (total_week / count_week).toFixed(1);
       console.log(week_avg);
 
 
@@ -385,5 +427,10 @@ block content
           //console.log(month_cutoff.setDate(month_cutoff.getDate()+7));
         }
       }
-      var month_avg = total_month / count_month;
+      var month_avg = (total_month / count_month).toFixed(1);
       console.log(month_avg);
+
+      //push weight summary stats to html
+      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + week_avg +"</b>";
+      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + month_avg +"</b>";
+      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + all_time_avg +"</b>";
