@@ -51,13 +51,23 @@ block content
 
           //need count in here to take the last value entered in goals
           var count = Object.keys(goals_json_value1.goal).length;
+          var weight_count = Object.keys(goals_json_value1.weight).length;
+          console.log(weight_count)
           //enter_goals.value = goals_json_value1[0].enter_goals;
           if(count != 0){
           goal_start.value = (goals_json_value1.goal[count-1].createdAt).substring(0,10);
           goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
           start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
-          units.value = goals_json_value1.goal[count-1].weight_units;}
+          units.value = goals_json_value1.goal[count-1].weight_units;
+          //progress = (goal-current - index 0 since sorted already)/(goal-start)
+          var progress_goal_stat = ((goal_weight.value)-(goals_json_value1.weight[0].weight))/((goal_weight.value)-(start_weight.value))
+          console.log(goal_weight.value)
+          console.log((goals_json_value1.weight[0].weight))
+          console.log(goal_weight.value)
+          console.log(start_weight.value)
+          console.log(progress_goal_stat)
+          }
           else{
             console.log("empty")
           }
@@ -236,6 +246,10 @@ block content
           bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
           bar.text.style.fontSize = '2rem';
           bar.animate(0.8);  // Number from 0.0 to 1.0
+      br
+      br
+      span#goal_progress_update.Price_num(style='font-size:90%;', <='', span='')
+
     br
     br
     br
@@ -309,7 +323,7 @@ block content
         var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date)
         y_weight.push(goals_json_value1.weight[i].weight);
         x_date.push(x_date_stg);
-        console.log(x_date);
+        //console.log(x_date);
       }
 
       var data = [
@@ -371,7 +385,7 @@ block content
         total += goals_json_value1.weight[i].weight;
       }
       var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
-      console.log(all_time_avg);
+
 
 
 
@@ -389,9 +403,7 @@ block content
         if(goals_json_value1.weight[j].date >= (n)){
           total_week += goals_json_value1.weight[j].weight;
           count_week += 1;
-          console.log(count_week);
-          console.log(goals_json_value1.weight[j].date);
-          console.log(goals_json_value1.weight[j].weight);
+
         }
         else {
           total_week += 0;
@@ -400,7 +412,6 @@ block content
         }
       }
       var week_avg = (total_week / count_week).toFixed(1);
-      console.log(week_avg);
 
 
       ////***30-day moving average//***
@@ -417,9 +428,9 @@ block content
         if(goals_json_value1.weight[k].date >= (m)){
           total_month += goals_json_value1.weight[k].weight;
           count_month += 1;
-          console.log(count_month);
-          console.log(goals_json_value1.weight[k].date);
-          console.log(goals_json_value1.weight[k].weight);
+          //console.log(count_month);
+          //console.log(goals_json_value1.weight[k].date);
+          //console.log(goals_json_value1.weight[k].weight);
         }
         else {
           total_month += 0;
@@ -428,9 +439,11 @@ block content
         }
       }
       var month_avg = (total_month / count_month).toFixed(1);
-      console.log(month_avg);
 
       //push weight summary stats to html
       document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + week_avg + "</b>";
       document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + month_avg +"</b>";
       document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + all_time_avg +"</b>";
+
+      //push goal progress update below progress bar
+      document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + 'skeleton, update' +"</b>";
