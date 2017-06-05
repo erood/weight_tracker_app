@@ -245,15 +245,15 @@ block content
     .container
       #lead_row.row
         #Price_group.col-md-4
-          span(style='font-size:120%;color:black;')   7-day average:
+          span(style='font-size:120%;')   7-day average:
           br
           span#week_avg.Price_num(style='font-size:110%;', <='', span='')
         #Prev_wk_close.col-md-4
-          span(style='font-size:120%;color:black;')   10-day average:
+          span(style='font-size:120%;')   10-day average:
           br
           span#month_avg.Prev_wk_close_num(style='font-size:110%;', <='', span='')
         #wk_high.col-md-4
-          span(style='font-size:120%;color:black;')   All-time average:
+          span(style='font-size:120%;')   All-time average:
           br
           span#all_time_avg(style='font-size:110%;', <='', span='')
 
@@ -431,6 +431,6 @@ block content
       console.log(month_avg);
 
       //push weight summary stats to html
-      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + week_avg +"</b>";
-      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + month_avg +"</b>";
-      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2'>" + all_time_avg +"</b>";
+      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + week_avg + "</b>";
+      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + month_avg +"</b>";
+      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + all_time_avg +"</b>";
