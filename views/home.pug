@@ -61,13 +61,16 @@ block content
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
           units.value = goals_json_value1.goal[count-1].weight_units;
           //progress = (goal-current - index 0 since sorted already)/(goal-start)
-          var progress_goal_stat = ((goal_weight.value)-(goals_json_value1.weight[0].weight))/((goal_weight.value)-(start_weight.value))
-          console.log(goal_weight.value)
-          console.log((goals_json_value1.weight[0].weight))
-          console.log(goal_weight.value)
-          console.log(start_weight.value)
-          console.log(progress_goal_stat)
-          }
+          if(weight_count != 0) {
+            var progress_goal_stat = ((goal_weight.value)-(goals_json_value1.weight[0].weight))/((goal_weight.value)-(start_weight.value))
+            console.log(goal_weight.value)
+            console.log((goals_json_value1.weight[0].weight))
+            console.log(goal_weight.value)
+            console.log(start_weight.value)
+            console.log(progress_goal_stat)
+              }
+                }
+
           else{
             console.log("empty")
           }
