@@ -62,7 +62,46 @@ block content
           units.value = goals_json_value1.goal[count-1].weight_units;
           //progress = (goal-current - index 0 since sorted already)/(goal-start)
           if(weight_count != 0) {
-            var progress_goal_stat = ((goal_weight.value)-(goals_json_value1.weight[0].weight))/((goal_weight.value)-(start_weight.value))
+            //set progress % var
+            var progress_goal_stat = 1-(Math.abs((goal_weight.value)-(goals_json_value1.weight[0].weight))/Math.abs((goal_weight.value)-(start_weight.value)))
+
+            //push goal progress update below progress bar
+            document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" +
+            "<p style='font-size:110%;line-height:1.5'>" + (Math.round(progress_goal_stat * 100) + '%') + ' to goal weight of '+ goal_weight.value
+            +units.value+', based on most recent weight of '+goals_json_value1.weight[0].weight+units.value+'.'+"</p>";
+
+            //update #progresscontainer bar
+            var bar = new ProgressBar.Line(progress_container, {
+            strokeWidth: 4,
+            easing: 'easeInOut',
+            duration: 1600,
+            color: '#2196f3',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: {width: '100%', height: '100%'},
+            text: {
+            style: {
+            // Text color.
+            // Default: same as stroke color (options.color)
+            color: '#2196f3',
+            position: 'relative',
+            right: '0',
+            top: '30px',
+            padding: 0,
+            margin: 0,
+            transform: null
+            },
+            autoStyleContainer: false
+            },
+            from: {color: '#FFEA82'},
+            to: {color: '#ED6A5A'},
+            step: (state, bar) => {
+            bar.setText(Math.round(bar.value() * 100) + '%');
+            }
+            });
+            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+            bar.text.style.fontSize = '2rem';
+            bar.animate(progress_goal_stat);  // Number from 0.0 to 1.0
             console.log(goal_weight.value)
             console.log((goals_json_value1.weight[0].weight))
             console.log(goal_weight.value)
@@ -210,52 +249,22 @@ block content
     br
     br
     h4 Progress to goal
-    br
     #progress_container
       script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
       script.
+          //https://kimmobrunfeldt.github.io/progressbar.js/ options
           //var ProgressBar = require('progressbar.js')
 
           // progressbar.js@1.0.0 version is used
           // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
-          var bar = new ProgressBar.Line(progress_container, {
-          strokeWidth: 4,
-          easing: 'easeInOut',
-          duration: 1400,
-          color: '#2196f3',
-          trailColor: '#eee',
-          trailWidth: 1,
-          svgStyle: {width: '100%', height: '100%'},
-          text: {
-          style: {
-          // Text color.
-          // Default: same as stroke color (options.color)
-          color: '#999',
-          position: 'relative',
-          right: '0',
-          top: '30px',
-          padding: 0,
-          margin: 0,
-          transform: null
-          },
-          autoStyleContainer: false
-          },
-          from: {color: '#FFEA82'},
-          to: {color: '#ED6A5A'},
-          step: (state, bar) => {
-          bar.setText(Math.round(bar.value() * 100) + ' %');
-          }
-          });
-          bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-          bar.text.style.fontSize = '2rem';
-          bar.animate(0.8);  // Number from 0.0 to 1.0
-      br
-      br
-      span#goal_progress_update.Price_num(style='font-size:90%;', <='', span='')
 
     br
     br
     br
+    .container
+      #lead_row.row
+        span#goal_progress_update.Price_num(style='', <='', span='')
+
     br
     h4 Summary statistics
     br
@@ -444,9 +453,6 @@ block content
       var month_avg = (total_month / count_month).toFixed(1);
 
       //push weight summary stats to html
-      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + week_avg + "</b>";
-      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + month_avg +"</b>";
-      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + all_time_avg +"</b>";
-
-      //push goal progress update below progress bar
-      document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" + "<b style='color:#0a6fc2;line-height:3'>" + 'skeleton, update' +"</b>";
+      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + week_avg + "</b>";
+      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + month_avg +"</b>";
+      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + all_time_avg +"</b>";
