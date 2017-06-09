@@ -68,3 +68,24 @@
         res.render('logbooks', locals);
     });
   };
+
+
+  /*
+  ------- [Deleting] Updated employee information
+  */
+
+  exports.postDeleteWeight = (req, res, next) => {
+
+    Weight.remove({$and:[
+      { weight: req.body.weight},
+      { date: req.body.date},
+      ]}, (err) =>
+        {
+          if (err) { return next(err); }
+          console.log("weight record deleted");
+          console.log(req.body.weight),
+          console.log(req.body.date)
+
+        }
+      );
+  };

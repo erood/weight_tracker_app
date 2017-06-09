@@ -144,7 +144,14 @@ block content
           //console.log(weights_json_value1[0].weight)
           ////***console.log(goals_json_value1.weight[0].weight);
           //default entry date to show today
-          document.getElementById("entry_date").valueAsDate = new Date()
+          var offset = new Date().getTimezoneOffset();
+          var date_stg1 = new Date();// gmt+2, == -120 (minutes)
+          var date_stg2 = date_stg1 + Math.abs(offset*60000)
+          var date_stg3 = new Date(date_stg2)
+          date_stg3.setDate(date_stg3.getDate()-1);
+
+          console.log(date_stg3)
+          document.getElementById("entry_date").valueAsDate = date_stg3
         };
 
         window.onload = function start(){

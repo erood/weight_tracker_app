@@ -148,6 +148,7 @@ app.get('/', passportConfig.isAuthenticated, goalController.getGoals);
 app.post('/postGoals', passportConfig.isAuthenticated, goalController.postGoals);
 app.post('/postWeights', passportConfig.isAuthenticated, goalController.postWeights);
 app.get('/logbooks', logbookController.getLogbooks);
+app.post('/logbooks/deleteweight', passportConfig.isAuthenticated, logbookController.postDeleteWeight);
 
 
 /**

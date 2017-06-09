@@ -14,6 +14,15 @@ block content
   //jquery
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   script.
+    var CSRF_HEADER = 'x-csrf-token';
+
+    var setCSRFToken = function (securityToken) {
+      jQuery.ajaxPrefilter(function (options, _, xhr) {
+        if (!xhr.crossDomain) {
+          xhr.setRequestHeader(CSRF_HEADER, securityToken);
+        }
+      });
+    };
     //console.log(db.weight.find().sort({"date":-1}));
     function get_pretty_date(value){
       var start_date = new Date(value)
@@ -22,7 +31,7 @@ block content
       var s_month = start_date.getMonth()+1;
       if(s_month <= 9)
           s_month = '0'+s_month;
-      var s_day= start_date.getDate();
+      var s_day= start_date.getDate()+1;
       if(s_day <= 9)
           s_day = '0'+s_day;
       var s_prettyDate = s_year +'-'+s_month +'-'+ s_day
@@ -46,12 +55,12 @@ block content
   .container
     //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
     .col-md-4.col-md-offset-4
-      table.table.table-hover
+      table#myTableData2.table.table-hover
         tr
           th(style='color:#333') Weight
           th(style='color:#333') Date
 
-      script.
+      script(type='text/javascript').
         var goals_json = document.getElementById("goals_json").value;
         var goals_json_value1 = JSON.parse(goals_json);
         console.log(goals_json_value1)
@@ -64,6 +73,34 @@ block content
           var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date);
           tr.append("<td>" + goals_json_value1.weight[i].weight+"</td>");
           tr.append("<td>" + x_date_stg+"</td>");
+          tr.append("<td>"+"<button onclick=\"deleteRow2(this)\">Delete</button>"+"</td>");
           $('table').append(tr);
         }
         });
+      script(type='text/javascript').
+        function deleteRow2(obj) {
+          var index = obj.parentNode.parentNode.rowIndex;
+          var table = document.getElementById("myTableData2");
+          var currentTD = obj.parentNode.parentNode.rowIndex;
+          var row_length = document.getElementById("myTableData2").rows[currentTD].cells.length;
+          var date_stg = document.getElementById("myTableData2").rows[currentTD].cells[1].innerHTML;
+          var date_iso_stg = new Date(date_stg);
+          var date_iso = date_iso_stg.toISOString();
+          console.log(date_iso)
+          var weight_data = {
+            'weight': document.getElementById("myTableData2").rows[currentTD].cells[0].innerHTML,
+            'date': date_iso
+
+           }
+
+          setCSRFToken($('meta[name="csrf-token"]').attr('content'));
+
+          $.ajax({
+              type: 'POST',
+              data: weight_data,
+              url: '/logbooks/deleteweight',
+              dataType: 'JSON'
+          });
+
+          table.deleteRow(index);
+        }
