@@ -1,16 +1,15 @@
 extends layout
 
 block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
-  hr
-  .row
-    .col-sm-6
-      .container
-        h4(style='color:#2196f3 !important') Weights
-        br
-        ul
-          input(type='hidden', id="goals_json", value= JSON.stringify(locals))
+  .container
+    br
+    //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
+    h4 Weight Archive - View/Delete Prior Entries
+    .row
+      .col-sm-6
+        .container
+          ul
+            input(type='hidden', id="goals_json", value= JSON.stringify(locals))
   //jquery
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   script.
@@ -54,53 +53,57 @@ block content
     }
   .container
     //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
-    .col-md-4.col-md-offset-4
-      table#myTableData2.table.table-hover
-        tr
-          th(style='color:#333') Weight
-          th(style='color:#333') Date
+    .col-md-4
+      //h4(style='color:#2196f3 !important') Weights
+      br
+      #tablediv.div
+        table#myTableData2.table.table-hover
+          tr
+            th(style='color:#333') Weight
+            th(style='color:#333') Date
+            th(style='color:#333')
 
-      script(type='text/javascript').
-        var goals_json = document.getElementById("goals_json").value;
-        var goals_json_value1 = JSON.parse(goals_json);
-        console.log(goals_json_value1)
-        //$(document).ready(function () {
-        $.parseJSON(goals_json,
-        function (json) {
-        var tr;
-        for (var i = 0; i < goals_json.length; i++) {
-          tr = $('<tr>');
-          var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date);
-          tr.append("<td>" + goals_json_value1.weight[i].weight+"</td>");
-          tr.append("<td>" + x_date_stg+"</td>");
-          tr.append("<td>"+"<button onclick=\"deleteRow2(this)\">Delete</button>"+"</td>");
-          $('table').append(tr);
-        }
-        });
-      script(type='text/javascript').
-        function deleteRow2(obj) {
-          var index = obj.parentNode.parentNode.rowIndex;
-          var table = document.getElementById("myTableData2");
-          var currentTD = obj.parentNode.parentNode.rowIndex;
-          var row_length = document.getElementById("myTableData2").rows[currentTD].cells.length;
-          var date_stg = document.getElementById("myTableData2").rows[currentTD].cells[1].innerHTML;
-          var date_iso_stg = new Date(date_stg);
-          var date_iso = date_iso_stg.toISOString();
-          console.log(date_iso)
-          var weight_data = {
-            'weight': document.getElementById("myTableData2").rows[currentTD].cells[0].innerHTML,
-            'date': date_iso
-
-           }
-
-          setCSRFToken($('meta[name="csrf-token"]').attr('content'));
-
-          $.ajax({
-              type: 'POST',
-              data: weight_data,
-              url: '/logbooks/deleteweight',
-              dataType: 'JSON'
+        script(type='text/javascript').
+          var goals_json = document.getElementById("goals_json").value;
+          var goals_json_value1 = JSON.parse(goals_json);
+          console.log(goals_json_value1)
+          //$(document).ready(function () {
+          $.parseJSON(goals_json,
+          function (json) {
+          var tr;
+          for (var i = 0; i < goals_json.length; i++) {
+            tr = $('<tr>');
+            var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date);
+            tr.append("<td>" + goals_json_value1.weight[i].weight+"</td>");
+            tr.append("<td>" + x_date_stg+"</td>");
+            tr.append("<td>"+"<btn class=\"btn-md btn-hover btn-default\" onclick=\"deleteRow2(this)\">Delete</button>"+"</td>");
+            $('table').append(tr);
+          }
           });
+        script(type='text/javascript').
+          function deleteRow2(obj) {
+            var index = obj.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("myTableData2");
+            var currentTD = obj.parentNode.parentNode.rowIndex;
+            var row_length = document.getElementById("myTableData2").rows[currentTD].cells.length;
+            var date_stg = document.getElementById("myTableData2").rows[currentTD].cells[1].innerHTML;
+            var date_iso_stg = new Date(date_stg);
+            var date_iso = date_iso_stg.toISOString();
+            console.log(date_iso)
+            var weight_data = {
+              'weight': document.getElementById("myTableData2").rows[currentTD].cells[0].innerHTML,
+              'date': date_iso
 
-          table.deleteRow(index);
-        }
+             }
+
+            setCSRFToken($('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                type: 'POST',
+                data: weight_data,
+                url: '/logbooks/deleteweight',
+                dataType: 'JSON'
+            });
+
+            table.deleteRow(index);
+          }
