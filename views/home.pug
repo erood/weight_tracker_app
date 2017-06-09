@@ -368,6 +368,7 @@ block content
           showgrid: false,
           zeroline: false,
           showline: false,
+          //tickformat: "%d %b %y",
           mirror: 'ticks',
           gridcolor: '#bdbdbd',
           gridwidth: 2,
@@ -391,8 +392,9 @@ block content
           },
           title:'Weight trend'
         };
-
-      Plotly.plot( TESTER, data, layout);
+      //>4 records to display chart (otherwise it's pretty meaningless + axis looks screwy)
+      if(goals_json_value1.weight.length>4)
+        Plotly.plot( TESTER, data, layout);
     br
     br
 
