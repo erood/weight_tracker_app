@@ -37,20 +37,6 @@ block content
       return s_prettyDate
 
     };
-    var y_weight = [];
-    var x_date = [];
-    //bringing in the html element
-    TESTER = document.getElementById('tester');
-    var goals_json = document.getElementById("goals_json").value;
-    var goals_json_value1 = JSON.parse(goals_json);
-    for (var i = 0; i < goals_json_value1.weight.length; i++){
-      //x_date_stg = (goals_json_value1.goal[count-1].createdAt).substring(0,10);
-      var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date)
-      y_weight.push(goals_json_value1.weight[i].weight);
-      x_date.push(x_date_stg);
-      console.log(x_date);
-      console.log(y_weight);
-    }
   .container
     //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
     .col-md-4
