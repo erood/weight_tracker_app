@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const goalSchema = new mongoose.Schema({
   name: String,
   email: String,
+  goal_start: String,
   enter_goals: String,
   goal_weight: Number,
   start_weight: Number,

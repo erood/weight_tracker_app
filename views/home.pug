@@ -4,12 +4,45 @@ block content
   //if not signed up, show landing page
   //if signed up, show key stats on home page
   if !user
-    h1 Hackathon Starter
-    p.lead A boilerplate for Node.js web applications.
-    hr
+    script.
+      function signup() {
+      document.getElementById("signup-form").submit();
+      }
+      //allow submitting with enter key
+      document.getElementById('signup-form').onkeydown = function(e){
+        if(e.keyCode == 13){
+        document.getElementById("signup-form").submit();
+        }
+      };
+    .row
+      .container
+        br
+        h2 Weight tracking, simplified.
+        br
+      #welcome.container
+        h3 Sign Up
+        br
+      form.form-horizontal(id='signup-form', action='/signup', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-3.control-label(for='email') Email
+          .col-sm-7
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+        .form-group
+          label.col-sm-3.control-label(for='password') Password
+          .col-sm-7
+            input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+        .form-group
+          label.col-sm-3.control-label(for='confirmPassword') Confirm Password
+          .col-sm-7
+            input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+        .form-group
+          #welcome.container
+            #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Login
+
     .row
       .col-sm-6
-        h2 Heading
+        h2
         p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
         p
           a.btn.btn-default(href='#', role='button') View details »
@@ -53,9 +86,8 @@ block content
           var count = Object.keys(goals_json_value1.goal).length;
           var weight_count = Object.keys(goals_json_value1.weight).length;
           console.log(weight_count)
-          //enter_goals.value = goals_json_value1[0].enter_goals;
           if(count != 0){
-          goal_start.value = (goals_json_value1.goal[count-1].createdAt).substring(0,10);
+          goal_start.value = (goals_json_value1.goal[count-1].goal_start)//.substring(0,10);
           goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
           start_weight.value = goals_json_value1.goal[count-1].start_weight;
           goal_date.value = goals_json_value1.goal[count-1].goal_date;
@@ -102,11 +134,11 @@ block content
             bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
             bar.text.style.fontSize = '2rem';
             bar.animate(progress_goal_stat);  // Number from 0.0 to 1.0
-            console.log(goal_weight.value)
-            console.log((goals_json_value1.weight[0].weight))
-            console.log(goal_weight.value)
-            console.log(start_weight.value)
-            console.log(progress_goal_stat)
+            //console.log(goal_weight.value)
+            //console.log((goals_json_value1.weight[0].weight))
+            //console.log(goal_weight.value)
+            //console.log(start_weight.value)
+            //console.log(progress_goal_stat)
               }
                 }
 
@@ -180,19 +212,27 @@ block content
           x.style.display = 'none';
             }
           }
-          function enter_goals() {
-            document.getElementById("goals_form").submit();
+        function enter_goals() {
+          document.getElementById("goals_form").submit();
 
-          }
-          function enter_weight() {
-          document.getElementById("weight_form").submit();
-          }
+        }
+        function enter_weight() {
+        document.getElementById("weight_form").submit();
+        }
+        //allow submitting with enter key
+        $('#goals_form').keydown(function() {
+        var key = e.which;
+        if (key == 13) {
+        // As ASCII code for ENTER key is "13"
+        document.getElementById("goals_form").submit();
+        }
+        });
     br
     br
     btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
 
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))
-    form(style='display:none',id="goals_form").form-horizontal(action='/postGoals', method='POST')
+    form(style='display:none',id="goals_form", name="goals_form").form-horizontal(action='/postGoals', method='POST')
       br
       input(type='hidden', name='_csrf', value=_csrf)
       //.form-group
@@ -232,6 +272,7 @@ block content
       .form-group
         .col-sm-offset-3.col-sm-4
           #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
+
 
     br
     br
