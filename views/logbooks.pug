@@ -24,6 +24,7 @@ block content
     };
     //console.log(db.weight.find().sort({"date":-1}));
     function get_pretty_date(value){
+      if(value) !=undefined
       var start_date = new Date(value)
       //start_date.setDate(start_date.getDate()+1);
       var s_year = start_date.getFullYear();

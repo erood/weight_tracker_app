@@ -148,7 +148,7 @@ block content
           var date_stg1 = new Date();// gmt+2, == -120 (minutes)
           var date_stg2 = date_stg1 + Math.abs(offset*60000)
           var date_stg3 = new Date(date_stg2)
-          date_stg3.setDate(date_stg3.getDate()-1);
+          date_stg3.setDate(date_stg3.getDate());
 
           console.log(date_stg3)
           document.getElementById("entry_date").valueAsDate = date_stg3
