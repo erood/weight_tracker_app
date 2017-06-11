@@ -22,7 +22,7 @@ exports.getGoals = (req, res, next) => {
   var locals = {};
   var tasks = [
       function(callback){
-        Goal.find(function (err, docs) {
+        Goal.find({ 'email': req.user.email }, function (err, docs) {
           if (err) { return callback(err); }
           if (docs != null){
             locals.goal = docs;
@@ -37,7 +37,7 @@ exports.getGoals = (req, res, next) => {
 
       function(callback){
         //used to sort weight by the log date (needed because a user can back date a weight entry making chart/log out of order)
-        Weight.find(function (err, docs1) {
+        Weight.find({ 'email': req.user.email }, function (err, docs1) {
           if (err) { return next(err); }
           if (docs1 != null){
             locals.weight = docs1;
@@ -145,46 +145,62 @@ exports.getGoals = (req, res, next) => {
 //needed for 302 redirect
 exports.index = (req, res) => {
   //bringing goals/data in on home page load (copy/pasted getGoals logic in here, that's it)
-  var locals = {};
-  var tasks = [
-      function(callback){
-        Goal.find(function (err, docs) {
-          if (err) { return callback(err); }
-          if (docs != null){
-            locals.goal = docs;
-            callback();
-          }
-          else{
-            locals.goal = docs;
-            callback();
-          }
-        });
-      },
+  //if (req.user) {
+  if((req.user)==undefined){
+    res.render('home', {
+    title: 'Home'
+    });
+  }
+  else
+    var locals = {};
+    var tasks = [
+        function(callback){
+            Goal.find({ 'email': req.user.email }, function (err, docs) {
+              if (err) { return next(err); }
+              if (docs != null){
+                locals.goal = docs;
+                callback();
+              }
+              else{
+                locals.goal = docs;
+                callback();
+              }
+            });
+          },
 
-      function(callback){
-        //used to sort weight by the log date (needed because a user can back date a weight entry making chart/log out of order)
-        Weight.find(function (err, docs1) {
-          if (err) { return next(err); }
-          if (docs1 != null){
-            locals.weight = docs1;
-            callback();
-          }
-          else{
-            locals.weight = docs1;
-            callback();
-          }
+        function(callback){
+          //used to sort weight by the log date (needed because a user can back date a weight entry making chart/log out of order)
+          Weight.find({ 'email': req.user.email }, function (err, docs1) {
+            console.log(req.user)
+            if (err) { return next(err); }
+            if (docs1 != null){
+              locals.weight = docs1;
+              callback();
+            }
+            else{
+              locals.weight = docs1;
+              callback();
+            }
 
-        }).sort({"date":-1});
-      },
+          }).sort({"date":-1});
+        },
 
-  ];
-
-  async.parallel(tasks, function(err) {
-      if (err) return next(err);
-      res.render('home', locals);
-  });
+    ];
+  if((req.user)==undefined){
+  }
+  else
+    async.parallel(tasks, function(err) {
+        if (err) return next(err);
+        res.render('home', locals);
+    });
 };
-
+//console.log('user is here')
+//}
+//exports.index = (req, res) => {
+//  res.render('home', {
+//    title: 'Home'
+//  });
+//};
 
 /**
  * POST /signup

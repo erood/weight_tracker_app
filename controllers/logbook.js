@@ -32,7 +32,7 @@
     var locals = {};
     var tasks = [
         function(callback){
-          Goal.find(function (err, docs) {
+          Goal.find({ 'email': req.user.email }, function (err, docs) {
             if (err) { return callback(err); }
             if (docs != null){
               locals.goal = docs;
@@ -47,7 +47,7 @@
 
         function(callback){
           //used to sort weight by the log date (needed because a user can back date a weight entry making chart/log out of order)
-          Weight.find(function (err, docs1) {
+          Weight.find({ 'email': req.user.email }, function (err, docs1) {
             if (err) { return next(err); }
             if (docs1 != null){
               locals.weight = docs1;

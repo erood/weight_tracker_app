@@ -8,12 +8,16 @@ block content
       function signup() {
       document.getElementById("signup-form").submit();
       }
-      //allow submitting with enter key
-      document.getElementById('signup-form').onkeydown = function(e){
-        if(e.keyCode == 13){
-        document.getElementById("signup-form").submit();
-        }
-      };
+      window.onload = function start(){
+      //allow submitting with enter key - Signup Form
+      $('#signup-form').keydown(function(e) {
+      var key = e.which;
+      if (key == 13) {
+      // As ASCII code for ENTER key is "13"
+      document.getElementById("signup-form").submit();
+      }
+      });
+      }
     .row
       .container
         br
@@ -187,10 +191,28 @@ block content
         };
 
         window.onload = function start(){
+
             change_table();
             change_weight();
 
+            //allow submitting with enter key - Goals Form
+            $('#goals_form').keydown(function(e) {
+            var key = e.which;
+            if (key == 13) {
+            // As ASCII code for ENTER key is "13"
+            document.getElementById("goals_form").submit();
+            }
+            });
 
+
+            //allow submitting with enter key - Weight Form
+            $('#weight_form').keydown(function(e) {
+            var key = e.which;
+            if (key == 13) {
+            // As ASCII code for ENTER key is "13"
+            document.getElementById("weight_form").submit();
+            }
+            });
 
             //if goals blank, will need to run goal_show_hide() and prompt to enter goals
             //goal_show_hide();
@@ -219,14 +241,7 @@ block content
         function enter_weight() {
         document.getElementById("weight_form").submit();
         }
-        //allow submitting with enter key
-        $('#goals_form').keydown(function() {
-        var key = e.which;
-        if (key == 13) {
-        // As ASCII code for ENTER key is "13"
-        document.getElementById("goals_form").submit();
-        }
-        });
+
     br
     br
     btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
