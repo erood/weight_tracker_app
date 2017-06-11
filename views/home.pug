@@ -20,51 +20,41 @@ block content
       }
     .row
       .container
-        br
-        h2 Weight tracking, simplified.
-        br
-      #welcome.container
-        h3 Sign Up
-        br
-      form.form-horizontal(id='signup-form', action='/signup', method='POST')
-        input(type='hidden', name='_csrf', value=_csrf)
-        .form-group
-          label.col-sm-3.control-label(for='email') Email
-          .col-sm-7
-            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
-        .form-group
-          label.col-sm-3.control-label(for='password') Password
-          .col-sm-7
-            input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-        .form-group
-          label.col-sm-3.control-label(for='confirmPassword') Confirm Password
-          .col-sm-7
-            input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
-        .form-group
-          #welcome.container
-            #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Login
+        .row
+          .col-md-5
+            br
+            br
+            br
+            br
+            br
+            br
+            h2 Weight tracking, simplified.
+            br
+            form.form-horizontal(id='signup-form', action='/signup', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label(type='hidden').col-sm-3.control-label(for='email')
+                input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+              .form-group
+                label(type='hidden').col-sm-3.control-label(for='password')
+                input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+              .form-group
+                label(type='hidden').col-sm-3.control-label(for='confirmPassword')
+                input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+              #signup.form-group
+                #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
+          .col-md-5.col-sm-offset-2
+            br
+            br  
+            h2 Gif here
+            br
+        .row
+          .col-md-8
+            br
+            br
+            h3 Some letters here
 
-    .row
-      .col-sm-6
-        h2
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
+
   else
 
     head
@@ -147,6 +137,8 @@ block content
                 }
 
           else{
+            document.getElementById("start_here_goals").innerHTML +=
+            "<p style='font-size:110%;line-height:1.5'>" + 'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>";
             console.log("empty")
           }
           //console.log(goals_json_value1.goal);
@@ -244,6 +236,9 @@ block content
 
     br
     br
+    .container
+      #lead_row.row
+        span#start_here_goals.Price_num(style='', <='', span='')
     btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
 
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))

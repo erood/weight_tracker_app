@@ -7,6 +7,15 @@
 
 // Scaffolding
 // -------------------------
+
+input.form-control{
+  width: 100% !important;
+}
+
+#signup.form-group{
+  text-align: center !important;
+}
+
 #welcome.container{
   text-align: center !important;
 }
