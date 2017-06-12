@@ -14,6 +14,17 @@
 //    border-style: solid !important;
 //    border-width: 1px !important;
 //}
+#subline.container{
+  text-align: center !important;
+  max-width: 85% !important;
+}
+
+.home__subline span {
+    //white-space: nowrap;
+    background-color: #d6ffd8;
+    font-weight: 700;
+    transition: background-color .25s ease-in-out;
+}
 
 .home__subline {
     //max-width: 80%;
@@ -21,7 +32,7 @@
     text-align: center;
     color: #000;
     font-family: Avenir,Lato,sans-serif;
-    font-size: 3.7rem;
+    font-size: 32px;
     margin-bottom: 2rem;
     transition: color .25s ease-in-out;
 }

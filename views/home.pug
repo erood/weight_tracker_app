@@ -22,7 +22,7 @@ block content
       .container
         .row
           #welcome.container
-            h3 Weight tracking, simplified.
+            h2 Weight tracking, simplified.
           #signup.col-sm-4.col-sm-offset-4
             br
             form.form-horizontal(id='signup-form', action='/signup', method='POST')
@@ -40,7 +40,7 @@ block content
                 #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
                 br
               br
-              br  
+              br
           br
           #welcome.container
             br
@@ -54,11 +54,18 @@ block content
             //#welcome.container
               br
               img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:100%; height:auto;')
-            #welcome.container
+            #subline.container
               br
               br
-
-              .home__subline Easy entry, analytics, and goal management help you stay on track.
+              p.home__subline
+                span Quick entry
+                | ,
+                |
+                span analytics
+                | , and
+                |  
+                span goal management
+                |  help you stay on track.
 
 
 
