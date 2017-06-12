@@ -8,10 +8,44 @@
 // Scaffolding
 // -------------------------
 
+
+//img {
+//    border: #afacac !important;
+//    border-style: solid !important;
+//    border-width: 1px !important;
+//}
+
+.home__subline {
+    //max-width: 80%;
+    line-height: 1.5;
+    text-align: center;
+    color: #000;
+    font-family: Avenir,Lato,sans-serif;
+    font-size: 3.7rem;
+    margin-bottom: 2rem;
+    transition: color .25s ease-in-out;
+}
+
+a.navbar-brand{
+  color: #2196f3 !important;
+  font-family: Avenir,Lato,sans-serif !important;
+  font-weight: bold;
+  font-size: 145%;
+}
+
+.navbar-default{
+  color: #777777 !important;
+}
+
+a.navbar-brand:hover{
+  color: #ff5722 !important;
+}
 input.form-control{
   width: 100% !important;
 }
-
+#signup.col-md-6{
+text-align: center !important;
+}
 #signup.form-group{
   text-align: center !important;
 }
