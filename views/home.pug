@@ -63,7 +63,7 @@ block content
                 |
                 span analytics
                 | , and
-                |  
+                |
                 span goal management
                 |  help you stay on track.
 
@@ -152,8 +152,11 @@ block content
                 }
 
           else{
+            //if goals are empty open the block and prompt user to enter
+            var settings_goals_block = document.getElementById('goals_form');
+            settings_goals_block.style.display = 'block';
             document.getElementById("start_here_goals").innerHTML +=
-            "<p style='font-size:110%;line-height:1.5'>" + 'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>";
+            "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>";
             console.log("empty")
           }
           //console.log(goals_json_value1.goal);
