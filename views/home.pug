@@ -380,6 +380,9 @@ block content
     br
     //this is where the chart will sit
     .div(id="tester")
+    .container
+      #lead_row.row
+        span#chart_display_prompt.Price_num(style='', <='', span='')
     //plotly import, no account needed!
     script(src='https://cdn.plot.ly/plotly-latest.min.js')
     //plotly docs: https://plot.ly/javascript/getting-started/
@@ -461,8 +464,15 @@ block content
           title:'Weight trend'
         };
       //>4 records to display chart (otherwise it's pretty meaningless + axis looks screwy)
-      if(goals_json_value1.weight.length>4)
-        Plotly.plot( TESTER, data, layout);
+      if(goals_json_value1.weight.length>4){
+        Plotly.plot( TESTER, data, layout)
+        console.log('plotting')
+      }
+          else{
+          document.getElementById("chart_display_prompt").innerHTML +=
+          "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log 5 or more weights and your interactive progress chart will appear here.'+"</p>";
+        }
+
     br
     br
 
