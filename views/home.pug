@@ -75,6 +75,9 @@ block content
     head
       //jquery
       script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+      //moment
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js')
+
       //functions
       script(type='text/javascript').
         var CSRF_HEADER = 'x-csrf-token';
@@ -369,6 +372,10 @@ block content
           span(style='font-size:120%;')   All-time average:
           br
           span#all_time_avg(style='font-size:110%;', <='', span='')
+        #wk_high.col-md-4
+          span(style='font-size:120%;')   Weight rate needed to hit goal:
+          br
+          span#weight_rate_needed(style='font-size:110%;', <='', span='')
 
       // second row (first block blank for thicker price)
       //#second_row.row
@@ -395,6 +402,12 @@ block content
     .container
       #lead_row.row
         span#chart_display_prompt.Price_num(style='', <='', span='')
+    
+    br
+    h4 Action Plan
+    br
+    .container
+    .p In order to hit goal of X by Y date
     //plotly import, no account needed!
     script(src='https://cdn.plot.ly/plotly-latest.min.js')
     //plotly docs: https://plot.ly/javascript/getting-started/
@@ -424,9 +437,7 @@ block content
       var goals_json = document.getElementById("goals_json").value;
       var goals_json_value1 = JSON.parse(goals_json);
       var count_1 = Object.keys(goals_json_value1.goal).length;
-      console.log(count_1)
       var y_goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
-      console.log(y_goal);
       for (var i = 0; i < goals_json_value1.weight.length; i++){
 
         var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date)
@@ -522,6 +533,24 @@ block content
       var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
 
 
+      //***weight loss/week to hit goal***//
+      //(goal-current)/[(goal date-current)/7]
+      
+      var goals_json = document.getElementById("goals_json").value;
+      var goals_json_value1 = JSON.parse(goals_json);
+      var count_1 = Object.keys(goals_json_value1.goal).length;
+      var goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
+      var goal_date_stg = (goals_json_value1.goal[count_1-1].goal_date)
+      var current_weight = goals_json_value1.weight[0].weight
+      var rightNow = new Date();
+      var res = rightNow.toISOString().slice(0,10);
+      
+      //bringing in moment here to get difference in days
+      var goal_date = moment(goal_date_stg);
+      var current_date = moment(res);
+      var nbDays = current_date.diff(goal_date, 'days');
+      
+      var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
 
 
       ////***7 day (week) moving average//***
@@ -579,7 +608,10 @@ block content
       document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + week_avg + "</b>";
       document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + month_avg +"</b>";
       document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + all_time_avg +"</b>";
+      document.getElementById("weight_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
+      + wt_change_per_week +'/week'+ "</b>" ;
 
+      
       //google analytics
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
