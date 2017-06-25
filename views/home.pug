@@ -109,8 +109,19 @@ block content
 
             //push goal progress update below progress bar
             document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" +
-            "<p style='font-size:110%;line-height:1.5'>" + (Math.round(progress_goal_stat * 100) + '%') + ' to goal weight of '+ goal_weight.value
-            +units.value+', based on most recent weight of '+goals_json_value1.weight[0].weight+units.value+'.'+"</p>";
+            "<p style='font-size:110%;line-height:1.5'>" + 
+            
+            "<span style='background-color:#d6ffd8;color:#333;'>"+
+            (Math.round(progress_goal_stat * 100) + '%')+"</span>"+ 
+            ' to goal weight of '+ 
+            
+            "<span style='background-color:#d6ffd8;color:#333;'>"+goal_weight.value+
+            units.value+"</span>"+
+            
+            ', based on most recent weight of '+
+            "<span style='background-color:#d6ffd8;color:#333;'>"+goals_json_value1.weight[0].weight+units.value+"</span>"+
+            
+            '.'+"</p>";
 
             //update #progresscontainer bar
             var bar = new ProgressBar.Line(progress_container, {
@@ -432,8 +443,8 @@ block content
           color: '#17bf63',
           size: 3,
           line: {
-          color: 'green',
-          width: 2
+          color: 'blue',
+          width: 1
               }
           },
           name: 'Goal Weight',
@@ -448,7 +459,7 @@ block content
           size: 3,
           line: {
           color: 'green',
-          width: 2
+          width: 1
               }
           },
           name: "Weight",
