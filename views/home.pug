@@ -553,7 +553,7 @@ block content
       var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
 
       //***cal change/day to hit goal***//
-      var cal_change_day = (wt_change_per_week*3500)/7
+      var cal_change_day = Math.round((wt_change_per_week*3500)/7
       
       ////***7 day (week) moving average//***
 
