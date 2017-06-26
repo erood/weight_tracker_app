@@ -165,7 +165,6 @@ block content
             //console.log(progress_goal_stat)
               }
                 }
-
           else{
             //if goals are empty open the block and prompt user to enter
             var settings_goals_block = document.getElementById('goals_form');
@@ -191,7 +190,6 @@ block content
           //Weight label form
           jQuery("label[for='weight_label']").html('Weight'+' ('+units.value+'):');
           //console.log(goals_json_value1.goal)
-
 
         };
 
@@ -267,27 +265,21 @@ block content
         document.getElementById("weight_form").submit();
         }
 
+
+    //************************************************************//    
+    //************************Begin pug**************************//
+    //***********************************************************//
+    
     br
     br
     .container
       #lead_row.row
         span#start_here_goals.Price_num(style='', <='', span='')
     btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
-
       input(type='hidden', id="goals_json", value= JSON.stringify(locals))
     form(style='display:none',id="goals_form", name="goals_form").form-horizontal(action='/postGoals', method='POST')
       br
       input(type='hidden', name='_csrf', value=_csrf)
-      //.form-group
-        label.col-sm-3.control-label Enter Goals?
-        .col-sm-6
-          label.radio.col-sm-3
-            input(type='radio', name='enter_goals', value='yes', data-toggle='radio')
-            span Yes
-          label.radio.col-sm-3
-            input(type='radio', name='enter_goals', value='no', data-toggle='radio')
-            span No
-
       .form-group
         label.col-sm-3.control-label(for='select_weight') Select units:
         .col-sm-2
@@ -316,7 +308,6 @@ block content
         .col-sm-offset-3.col-sm-4
           #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
 
-
     br
     br
     br
@@ -340,14 +331,9 @@ block content
     br
     h4 Progress to goal
     #progress_container
+      //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
       script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
-      script.
-          //https://kimmobrunfeldt.github.io/progressbar.js/ options
-          //var ProgressBar = require('progressbar.js')
-
-          // progressbar.js@1.0.0 version is used
-          // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
-
+        
     br
     br
     br
@@ -381,21 +367,6 @@ block content
           br
           span#cal_rate_needed(style='font-size:110%;', <='', span='')
 
-      // second row (first block blank for thicker price)
-      //#second_row.row
-        #Buffer.col-md-4
-          span
-          br
-          span
-        #Change.col-md-4
-          span(style='color:black;font-weight:bold;font-size:120%')   Change (% chg):
-          br
-          span#Change_num(style='font-size:110%;', <='', span='')
-        #wk_low.col-md-4
-          span(style='font-size:120%;color:black;font-weight:bold;')   52-wk Low:
-          br
-          span#52_wk_low(style='font-size:110%;', <='', span='')
-
     br
     br
     br
@@ -407,6 +378,12 @@ block content
       #lead_row.row
         span#chart_display_prompt.Price_num(style='', <='', span='')
     
+    
+    
+    
+    //**************************************************************************//
+    //********************************SCRIPTS***********************************//
+    //**************************************************************************//
     
     //plotly import, no account needed!
     script(src='https://cdn.plot.ly/plotly-latest.min.js')

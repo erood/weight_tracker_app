@@ -12,6 +12,7 @@ block content
             input(type='hidden', id="goals_json", value= JSON.stringify(locals))
   //jquery
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  //functions
   script.
     var CSRF_HEADER = 'x-csrf-token';
 
@@ -37,6 +38,11 @@ block content
       return s_prettyDate
 
     };
+    
+  //************************************************************//    
+  //************************Begin pug**************************//
+  //***********************************************************//
+    
   .container
     //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
     .col-md-4
@@ -48,7 +54,10 @@ block content
             th(style='color:#333') Weight
             th(style='color:#333') Date
             th(style='color:#333')
-
+        
+        //************************************************************//    
+        //************************Scripts****************************//
+        //***********************************************************//
         script(type='text/javascript').
           var goals_json = document.getElementById("goals_json").value;
           var goals_json_value1 = JSON.parse(goals_json);
@@ -79,11 +88,8 @@ block content
             var weight_data = {
               'weight': document.getElementById("myTableData2").rows[currentTD].cells[0].innerHTML,
               'date': date_iso
-
              }
-
             setCSRFToken($('meta[name="csrf-token"]').attr('content'));
-
             $.ajax({
                 type: 'POST',
                 data: weight_data,
@@ -93,6 +99,7 @@ block content
 
             table.deleteRow(index);
           }
+          
           //google analytics  
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
