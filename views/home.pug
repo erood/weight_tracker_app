@@ -376,6 +376,10 @@ block content
           span(style='font-size:120%;')   Weight rate needed to hit goal:
           br
           span#weight_rate_needed(style='font-size:110%;', <='', span='')
+        #wk_high.col-md-4
+          span(style='font-size:120%;')   Calorie deficit/surplus needed to hit goal:
+          br
+          span#cal_rate_needed(style='font-size:110%;', <='', span='')
 
       // second row (first block blank for thicker price)
       //#second_row.row
@@ -529,8 +533,8 @@ block content
       var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
 
 
-      //***weight loss/week to hit goal***//
-      //(goal-current)/[(goal date-current)/7]
+      //***weight change/week to hit goal***//
+      ////(goal-current)/[(goal date-current)/7]
       
       var goals_json = document.getElementById("goals_json").value;
       var goals_json_value1 = JSON.parse(goals_json);
@@ -541,14 +545,16 @@ block content
       var rightNow = new Date();
       var res = rightNow.toISOString().slice(0,10);
       
-      //bringing in moment here to get difference in days
+      ////bringing in moment here to get difference in days
       var goal_date = moment(goal_date_stg);
       var current_date = moment(res);
       var nbDays = current_date.diff(goal_date, 'days');
       
       var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
 
-
+      //***cal change/day to hit goal***//
+      var cal_change_day = (wt_change_per_week*3500)/7
+      
       ////***7 day (week) moving average//***
 
       var week_cutoff = new Date();
@@ -606,6 +612,8 @@ block content
       document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + all_time_avg +"</b>";
       document.getElementById("weight_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
       + wt_change_per_week +'/week'+ "</b>" ;
+      document.getElementById("cal_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
+      + cal_change_day +'/day'+ "</b>" ;
 
       
       //google analytics
