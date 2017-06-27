@@ -1,6 +1,20 @@
 extends ../layout
 
 block content
+  script.
+    function login() {
+    document.getElementById("login_form").submit();
+    }
+    window.onload = function start(){
+    //allow submitting with enter key - Login Form
+    $('#login_form').keydown(function(e) {
+    var key = e.which;
+    if (key == 13) {
+    // As ASCII code for ENTER key is "13"
+    document.getElementById("login_form").submit();
+    }
+    });
+    }
   #welcome.container
     br
     h3 Welcome Back
@@ -43,20 +57,7 @@ block content
         a.btn.btn-block.btn-instagram.btn-social(href='/auth/instagram')
           i.fa.fa-instagram
           | Sign in with Instagram
-    script.
-      function login() {
-      document.getElementById("login_form").submit();
-      }
-      window.onload = function start(){
-      //allow submitting with enter key - Login Form
-      $('#login_form').keydown(function(e) {
-      var key = e.which;
-      if (key == 13) {
-      // As ASCII code for ENTER key is "13"
-      document.getElementById("login_form").submit();
-      }
-      });
-      }
+
       //google analytics
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

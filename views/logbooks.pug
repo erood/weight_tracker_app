@@ -1,15 +1,35 @@
 extends layout
 
 block content
+  
+  //twilio testing
+  //script.
+    window.onload = function start(){
+    function send_text() {
+      document.getElementById("text_form").submit();
+      }
+    }
+    
   .container
     br
-    //centering logic: https://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
     h4 Weight Archive - View/Delete Prior Entries
     .row
       .col-sm-6
         .container
           ul
             input(type='hidden', id="goals_json", value= JSON.stringify(locals))
+              
+        //Twilio Testing
+        //form(id="text_form", name="text_form").form-horizontal(action='/postTwilio', method='POST')
+          br
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-3.control-label(for='location') Enter phone #:
+            .col-sm-7
+              input.form-control(type='text' name='goal_start', id='goal_start')
+          .form-group
+            .col-sm-offset-3.col-sm-4
+              #submit.btn.btn-md.btn-hover.btn-default(onclick='send_text()') Text Phone (test)
   //jquery
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   //functions
