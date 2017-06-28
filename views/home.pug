@@ -40,23 +40,42 @@ block content
                 #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
                 br
               br
+              
+        #landing.container   
+          .row      
+            .col-md-6
               br
-          br
-          #welcome.container
-            br
-            br
-            img(src='http://erikrood.com/Utils/mescale_landing_v2.gif', class='img-fluid', alt='Mescale', style='max-width:85%; height:auto;')
-            br
-            br
+              br
+              br
+              br   
+              br 
+              #landing.h3.subheading
+                | Set a goal, see progress
+              p.paragraph(style='font-size:110%;line-height:1.5')
+                | Let us know if you want to gain, lose, or maintain weight. 
+                br
+                | We'll do the math and guide your progress to plan.
+            .col-md-6
+              br
+              
+              img.img-fluid(src='http://erikrood.com/Utils/mescale_landing_goal_hit.png', alt='Mescale', style='max-width:100%; height:auto;')
+              //h3.subheading
+                | Instant Handles
+              //p.paragraph
+                | Naming your brand has never been soooo easy! With Launchaco you can instantly search for twitter, facebook, medium, and instagram handles.
       .row
         .container
           .row
             //#welcome.container
               br
-              img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:100%; height:auto;')
+              img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:95%; height:auto;')
             #subline.container
               br
               br
+              br  
+              br
+              br  
+            
               p.home__subline
                 span Quick entry
                 | ,
@@ -66,6 +85,27 @@ block content
                 |
                 span goal management
                 |  help you stay on track.
+      #landing.container   
+        .row   
+    
+        
+          br  
+          br
+          .col-md-6
+            br  
+            #landing.h3.subheading
+              | Log quickly, log anywhere
+            p.paragraph(style='font-size:110%;line-height:1.5')
+              | Dieting is difficult enough, logging your weight shouldn't be. Mescale provides a fast, clean, simple interface on both desktop and mobile.
+
+          .col-md-6
+            br
+            #landing.h3.subheading
+              | Let us do the math
+            p.paragraph(style='font-size:110%;line-height:1.5')
+              | Stats like weekly weight change, weight loss needed/week to hit goal, 
+              and caloric deficit/week need to hit goal will keep you on track. We 
+              digest your weight information and turn it into beautiful summaries you can read at a glance.
 
 
 
@@ -427,14 +467,13 @@ block content
       var trace_0 = {
           x: x_date,
           y: y_goal,
-          marker: {
-          color: '#17bf63',
-          size: 3,
+          mode: 'lines',
+
           line: {
-          color: 'blue',
-          width: 1
-              }
-          },
+          dash: 'dot',
+          color: '#17bf63',
+          width: 2
+              },
           name: 'Goal Weight',
           type: "scatter",
         };
@@ -442,14 +481,10 @@ block content
       var trace_1 = {
           x: x_date,
           y: y_weight,
-          marker: {
-          color: 'rgb(33, 150, 243)',
-          size: 3,
           line: {
-          color: 'green',
-          width: 1
-              }
-          },
+          color: 'rgb(33, 150, 243)',
+          width: 2
+              },
           name: "Weight",
           type: "scatter",
         };
