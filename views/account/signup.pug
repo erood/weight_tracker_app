@@ -1,6 +1,17 @@
 extends ../layout
 
 block content
+  script.
+    window.onload = function start(){
+    //allow submitting with enter key - Signup Form
+    $('#signup-form').keydown(function(e) {
+    var key = e.which;
+    if (key == 13) {
+    // As ASCII code for ENTER key is "13"
+    document.getElementById("signup-form").submit();
+    }
+    });
+    }
   #welcome.container
     br
     h3 Sign Up
@@ -26,16 +37,7 @@ block content
       function signup() {
       document.getElementById("signup-form").submit();
       }
-      window.onload = function start(){
-      //allow submitting with enter key - Signup Form
-      $('#signup-form').keydown(function(e) {
-      var key = e.which;
-      if (key == 13) {
-      // As ASCII code for ENTER key is "13"
-      document.getElementById("signup-form").submit();
-      }
-      });
-      }
+
       //google analytics  
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
