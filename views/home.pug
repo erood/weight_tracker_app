@@ -311,326 +311,328 @@ block content
     
     br
     br
-    .container
-      #lead_row.row
-        span#start_here_goals.Price_num(style='', <='', span='')
-    btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
-      input(type='hidden', id="goals_json", value= JSON.stringify(locals))
-    form(style='display:none',id="goals_form", name="goals_form").form-horizontal(action='/postGoals', method='POST')
-      br
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-3.control-label(for='select_weight') Select units:
-        .col-sm-2
-          select.form-control(type = 'text', name='weight_units', id='weight_units')
-            option lbs
-            |
-            option kg
-            |
-      .form-group
-        label.col-sm-3.control-label(for='location') Goal Start Date:
-        .col-sm-7
-          input.form-control(type='date' name='goal_start', id='goal_start')
-      .form-group
-        label.col-sm-3.control-label(for='start_weight_label')
-        .col-sm-7
-          input.form-control(type='number', step="any", min="0" name='start_weight', id='start_weight')
-      .form-group
-        label.col-sm-3.control-label(for='goal_weight_label')
-        .col-sm-7
-          input.form-control(type='number', step="any", min="0" name='goal_weight', id='goal_weight')
-      .form-group
-        label.col-sm-3.control-label(for='website') Target Date:
-        .col-sm-7
-          input.form-control(type='date', name='goal_date', id='goal_date')
-      .form-group
-        .col-sm-offset-3.col-sm-4
-          #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
+    //just remove this and bump indent out 2 levels to stretch whole screen  
+    .col-lg-offset-1.col-lg-10   
+        .container
+          #lead_row.row
+            span#start_here_goals.Price_num(style='', <='', span='')
+        btn.btn-md.btn-hover.btn-default(onclick='goal_show_hide()') Settings/Goals
+          input(type='hidden', id="goals_json", value= JSON.stringify(locals))
+        form(style='display:none',id="goals_form", name="goals_form").form-horizontal(action='/postGoals', method='POST')
+          br
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-3.control-label(for='select_weight') Select units:
+            .col-sm-2
+              select.form-control(type = 'text', name='weight_units', id='weight_units')
+                option lbs
+                |
+                option kg
+                |
+          .form-group
+            label.col-sm-3.control-label(for='location') Goal Start Date:
+            .col-sm-7
+              input.form-control(type='date' name='goal_start', id='goal_start')
+          .form-group
+            label.col-sm-3.control-label(for='start_weight_label')
+            .col-sm-7
+              input.form-control(type='number', step="any", min="0" name='start_weight', id='start_weight')
+          .form-group
+            label.col-sm-3.control-label(for='goal_weight_label')
+            .col-sm-7
+              input.form-control(type='number', step="any", min="0" name='goal_weight', id='goal_weight')
+          .form-group
+            label.col-sm-3.control-label(for='website') Target Date:
+            .col-sm-7
+              input.form-control(type='date', name='goal_date', id='goal_date')
+          .form-group
+            .col-sm-offset-3.col-sm-4
+              #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
 
-    br
-    br
-    br
-    h4 Enter weight
-    br
-    br
-    form.form-horizontal(id="weight_form", action='/postWeights', method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-3.control-label(for='weight_label')
-        .col-sm-7
-          input.form-control(type='number', step="any", min="0", name='enter_weight_actual', id='enter_weight_actual')
-      .form-group
-        label.col-sm-3.control-label(for='website') Date:
-        .col-sm-7
-          input.form-control(type='date', name='entry_date', id='entry_date')
-      .form-group
-        .col-sm-offset-3.col-sm-4
-          #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_weight()') Enter Weight
-    br
-    br
-    h4 Progress to goal
-    #progress_container
-      //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
+        br
+        br
+        br
+        h4 Enter weight
+        br
+        br
+        form.form-horizontal(id="weight_form", action='/postWeights', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-3.control-label(for='weight_label')
+            .col-sm-7
+              input.form-control(type='number', step="any", min="0", name='enter_weight_actual', id='enter_weight_actual')
+          .form-group
+            label.col-sm-3.control-label(for='website') Date:
+            .col-sm-7
+              input.form-control(type='date', name='entry_date', id='entry_date')
+          .form-group
+            .col-sm-offset-3.col-sm-4
+              #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_weight()') Enter Weight
+        br
+        br
+        h4 Progress to goal
+        #progress_container
+          //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
+          script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
+            
+        br
+        br
+        br
+        .container
+          #lead_row.row
+            span#goal_progress_update.Price_num(style='', <='', span='')
+
+        br
+        h4 Summary statistics
+        br
+        .container
+          #lead_row.row
+            #Price_group.col-md-4
+              span(style='font-size:120%;')   7-day average:
+              br
+              span#week_avg.Price_num(style='font-size:110%;', <='', span='')
+            #Prev_wk_close.col-md-4
+              span(style='font-size:120%;')   10-day average:
+              br
+              span#month_avg.Prev_wk_close_num(style='font-size:110%;', <='', span='')
+            #wk_high.col-md-4
+              span(style='font-size:120%;')   All-time average:
+              br
+              span#all_time_avg(style='font-size:110%;', <='', span='')
+            #wk_high.col-md-4
+              span(style='font-size:120%;')   Weight rate needed to hit goal:
+              br
+              span#weight_rate_needed(style='font-size:110%;', <='', span='')
+            #wk_high.col-md-4
+              span(style='font-size:120%;')   Calorie deficit/surplus needed to hit goal:
+              br
+              span#cal_rate_needed(style='font-size:110%;', <='', span='')
+
+        br
+        br
+        br
+        br
+        br
+        //this is where the chart will sit
+        .div(id="tester")
+        .container
+          #lead_row.row
+            span#chart_display_prompt.Price_num(style='', <='', span='')
         
-    br
-    br
-    br
-    .container
-      #lead_row.row
-        span#goal_progress_update.Price_num(style='', <='', span='')
+        
+        
+        
+        //**************************************************************************//
+        //********************************SCRIPTS***********************************//
+        //**************************************************************************//
+        
+        //plotly import, no account needed!
+        script(src='https://cdn.plot.ly/plotly-latest.min.js')
+        //plotly docs: https://plot.ly/javascript/getting-started/
+        script.
+          //console.log(db.weight.find().sort({"date":-1}));
+          function get_pretty_date(value){
+            var start_date = new Date(value)
+            //start_date.setDate(start_date.getDate()+1);
+            var s_year = start_date.getFullYear();
+            var s_month = start_date.getMonth()+1;
+            if(s_month <= 9)
+                s_month = '0'+s_month;
+            var s_day= start_date.getDate();
+            if(s_day <= 9)
+                s_day = '0'+s_day;
+            var s_prettyDate = s_year +'-'+s_month +'-'+ s_day
+            return s_prettyDate
 
-    br
-    h4 Summary statistics
-    br
-    .container
-      #lead_row.row
-        #Price_group.col-md-4
-          span(style='font-size:120%;')   7-day average:
-          br
-          span#week_avg.Price_num(style='font-size:110%;', <='', span='')
-        #Prev_wk_close.col-md-4
-          span(style='font-size:120%;')   10-day average:
-          br
-          span#month_avg.Prev_wk_close_num(style='font-size:110%;', <='', span='')
-        #wk_high.col-md-4
-          span(style='font-size:120%;')   All-time average:
-          br
-          span#all_time_avg(style='font-size:110%;', <='', span='')
-        #wk_high.col-md-4
-          span(style='font-size:120%;')   Weight rate needed to hit goal:
-          br
-          span#weight_rate_needed(style='font-size:110%;', <='', span='')
-        #wk_high.col-md-4
-          span(style='font-size:120%;')   Calorie deficit/surplus needed to hit goal:
-          br
-          span#cal_rate_needed(style='font-size:110%;', <='', span='')
+          };
+          var y_weight = [];
+          var x_date = [];
 
-    br
-    br
-    br
-    br
-    br
-    //this is where the chart will sit
-    .div(id="tester")
-    .container
-      #lead_row.row
-        span#chart_display_prompt.Price_num(style='', <='', span='')
-    
-    
-    
-    
-    //**************************************************************************//
-    //********************************SCRIPTS***********************************//
-    //**************************************************************************//
-    
-    //plotly import, no account needed!
-    script(src='https://cdn.plot.ly/plotly-latest.min.js')
-    //plotly docs: https://plot.ly/javascript/getting-started/
-    script.
-      //console.log(db.weight.find().sort({"date":-1}));
-      function get_pretty_date(value){
-        var start_date = new Date(value)
-        //start_date.setDate(start_date.getDate()+1);
-        var s_year = start_date.getFullYear();
-        var s_month = start_date.getMonth()+1;
-        if(s_month <= 9)
-            s_month = '0'+s_month;
-        var s_day= start_date.getDate();
-        if(s_day <= 9)
-            s_day = '0'+s_day;
-        var s_prettyDate = s_year +'-'+s_month +'-'+ s_day
-        return s_prettyDate
+          var y_goal = [];
 
-      };
-      var y_weight = [];
-      var x_date = [];
+          //bringing in the html element
+          TESTER = document.getElementById('tester');
+          var goals_json = document.getElementById("goals_json").value;
+          var goals_json_value1 = JSON.parse(goals_json);
+          var count_1 = Object.keys(goals_json_value1.goal).length;
+          var y_goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
+          for (var i = 0; i < goals_json_value1.weight.length; i++){
 
-      var y_goal = [];
-
-      //bringing in the html element
-      TESTER = document.getElementById('tester');
-      var goals_json = document.getElementById("goals_json").value;
-      var goals_json_value1 = JSON.parse(goals_json);
-      var count_1 = Object.keys(goals_json_value1.goal).length;
-      var y_goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
-      for (var i = 0; i < goals_json_value1.weight.length; i++){
-
-        var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date)
-        y_weight.push(goals_json_value1.weight[i].weight);
-        x_date.push(x_date_stg);
-        y_goal.push(y_goal_stg);
+            var x_date_stg = get_pretty_date(goals_json_value1.weight[i].date)
+            y_weight.push(goals_json_value1.weight[i].weight);
+            x_date.push(x_date_stg);
+            y_goal.push(y_goal_stg);
 
 
-      }
-      var trace_0 = {
-          x: x_date,
-          y: y_goal,
-          mode: 'lines',
+          }
+          var trace_0 = {
+              x: x_date,
+              y: y_goal,
+              mode: 'lines',
 
-          line: {
-          dash: 'dot',
-          color: '#17bf63',
-          width: 2
+              line: {
+              dash: 'dot',
+              color: '#17bf63',
+              width: 2
+                  },
+              name: 'Goal Weight',
+              type: "scatter",
+            };
+
+          var trace_1 = {
+              x: x_date,
+              y: y_weight,
+              line: {
+              color: 'rgb(33, 150, 243)',
+              width: 2
+                  },
+              name: "Weight",
+              type: "scatter",
+            };
+
+          var data = [trace_0,trace_1];
+
+          var layout = {
+            xaxis: {
+              type: 'date',
+              title: 'Date',
+              showgrid: false,
+              zeroline: false,
+              showline: false,
+              //tickformat: "%d %b %y",
+              mirror: 'ticks',
+              gridcolor: '#bdbdbd',
+              gridwidth: 2,
+              zerolinecolor: '#969696',
+              zerolinewidth: 4,
+              linecolor: '#636363',
+              linewidth: 2
+
+            },yaxis: {
+              title: 'Weight',
+              showgrid: false,
+              zeroline: false,
+              showline: false,
+              mirror: 'ticks',
+              gridcolor: '#bdbdbd',
+              gridwidth: 2,
+              zerolinecolor: '#969696',
+              zerolinewidth: 4,
+              linecolor: '#636363',
+              linewidth: 2
               },
-          name: 'Goal Weight',
-          type: "scatter",
-        };
+              title:'Weight trend'
+            };
+          //>4 records to display chart (otherwise it's pretty meaningless + axis looks screwy)
+          if(goals_json_value1.weight.length>4){
+            Plotly.plot( TESTER, data, layout)
+            console.log('plotting')
+          }
+              else{
+              document.getElementById("chart_display_prompt").innerHTML +=
+              "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log 5 or more weights and your interactive progress chart will appear here.'+"</p>";
+            }
 
-      var trace_1 = {
-          x: x_date,
-          y: y_weight,
-          line: {
-          color: 'rgb(33, 150, 243)',
-          width: 2
-              },
-          name: "Weight",
-          type: "scatter",
-        };
+        br
+        br
 
-      var data = [trace_0,trace_1];
-
-      var layout = {
-        xaxis: {
-          type: 'date',
-          title: 'Date',
-          showgrid: false,
-          zeroline: false,
-          showline: false,
-          //tickformat: "%d %b %y",
-          mirror: 'ticks',
-          gridcolor: '#bdbdbd',
-          gridwidth: 2,
-          zerolinecolor: '#969696',
-          zerolinewidth: 4,
-          linecolor: '#636363',
-          linewidth: 2
-
-        },yaxis: {
-          title: 'Weight',
-          showgrid: false,
-          zeroline: false,
-          showline: false,
-          mirror: 'ticks',
-          gridcolor: '#bdbdbd',
-          gridwidth: 2,
-          zerolinecolor: '#969696',
-          zerolinewidth: 4,
-          linecolor: '#636363',
-          linewidth: 2
-          },
-          title:'Weight trend'
-        };
-      //>4 records to display chart (otherwise it's pretty meaningless + axis looks screwy)
-      if(goals_json_value1.weight.length>4){
-        Plotly.plot( TESTER, data, layout)
-        console.log('plotting')
-      }
-          else{
-          document.getElementById("chart_display_prompt").innerHTML +=
-          "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log 5 or more weights and your interactive progress chart will appear here.'+"</p>";
-        }
-
-    br
-    br
-
-    //***weight summary stats//***
-    script.
-      //***all time average//***
-      var total = 0;
-      for(var i = 0; i < goals_json_value1.weight.length; i++) {
-        total += goals_json_value1.weight[i].weight;
-      }
-      var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
+        //***weight summary stats//***
+        script.
+          //***all time average//***
+          var total = 0;
+          for(var i = 0; i < goals_json_value1.weight.length; i++) {
+            total += goals_json_value1.weight[i].weight;
+          }
+          var all_time_avg = (total / goals_json_value1.weight.length).toFixed(1);
 
 
-      //***weight change/week to hit goal***//
-      ////(goal-current)/[(goal date-current)/7]
-      
-      var goals_json = document.getElementById("goals_json").value;
-      var goals_json_value1 = JSON.parse(goals_json);
-      var count_1 = Object.keys(goals_json_value1.goal).length;
-      var goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
-      var goal_date_stg = (goals_json_value1.goal[count_1-1].goal_date)
-      var current_weight = goals_json_value1.weight[0].weight
-      var rightNow = new Date();
-      var res = rightNow.toISOString().slice(0,10);
-      
-      ////bringing in moment here to get difference in days
-      var goal_date = moment(goal_date_stg);
-      var current_date = moment(res);
-      var nbDays = current_date.diff(goal_date, 'days');
-      
-      var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
+          //***weight change/week to hit goal***//
+          ////(goal-current)/[(goal date-current)/7]
+          
+          var goals_json = document.getElementById("goals_json").value;
+          var goals_json_value1 = JSON.parse(goals_json);
+          var count_1 = Object.keys(goals_json_value1.goal).length;
+          var goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
+          var goal_date_stg = (goals_json_value1.goal[count_1-1].goal_date)
+          var current_weight = goals_json_value1.weight[0].weight
+          var rightNow = new Date();
+          var res = rightNow.toISOString().slice(0,10);
+          
+          ////bringing in moment here to get difference in days
+          var goal_date = moment(goal_date_stg);
+          var current_date = moment(res);
+          var nbDays = current_date.diff(goal_date, 'days');
+          
+          var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
 
-      //***cal change/day to hit goal***//
-      var cal_change_day = Math.round((wt_change_per_week*3500)/7)
-      
-      ////***7 day (week) moving average//***
+          //***cal change/day to hit goal***//
+          var cal_change_day = Math.round((wt_change_per_week*3500)/7)
+          
+          ////***7 day (week) moving average//***
 
-      var week_cutoff = new Date();
-      week_cutoff.setDate(week_cutoff.getDate()-7);
-      //convert to ISO so matches for comparison
-      var n = week_cutoff.toISOString();
+          var week_cutoff = new Date();
+          week_cutoff.setDate(week_cutoff.getDate()-7);
+          //convert to ISO so matches for comparison
+          var n = week_cutoff.toISOString();
 
-      var total_week = 0;
-      var count_week = 0;
-      for(var j = 0; j < goals_json_value1.weight.length; j++) {
+          var total_week = 0;
+          var count_week = 0;
+          for(var j = 0; j < goals_json_value1.weight.length; j++) {
 
-        if(goals_json_value1.weight[j].date >= (n)){
-          total_week += goals_json_value1.weight[j].weight;
-          count_week += 1;
+            if(goals_json_value1.weight[j].date >= (n)){
+              total_week += goals_json_value1.weight[j].weight;
+              count_week += 1;
 
-        }
-        else {
-          total_week += 0;
-          //console.log(goals_json_value1.weight[j].date);
-          //console.log(week_cutoff.setDate(week_cutoff.getDate()+7));
-        }
-      }
-      var week_avg = (total_week / count_week).toFixed(1);
+            }
+            else {
+              total_week += 0;
+              //console.log(goals_json_value1.weight[j].date);
+              //console.log(week_cutoff.setDate(week_cutoff.getDate()+7));
+            }
+          }
+          var week_avg = (total_week / count_week).toFixed(1);
 
 
-      ////***30-day moving average//***
+          ////***30-day moving average//***
 
-      var month_cutoff = new Date();
-      month_cutoff.setDate(month_cutoff.getDate()-30);
-      //convert to ISO so matches for comparison
-      var m = month_cutoff.toISOString();
+          var month_cutoff = new Date();
+          month_cutoff.setDate(month_cutoff.getDate()-30);
+          //convert to ISO so matches for comparison
+          var m = month_cutoff.toISOString();
 
-      var total_month = 0;
-      var count_month = 0;
-      for(var k = 0; k < goals_json_value1.weight.length; k++) {
+          var total_month = 0;
+          var count_month = 0;
+          for(var k = 0; k < goals_json_value1.weight.length; k++) {
 
-        if(goals_json_value1.weight[k].date >= (m)){
-          total_month += goals_json_value1.weight[k].weight;
-          count_month += 1;
-          //console.log(count_month);
-          //console.log(goals_json_value1.weight[k].date);
-          //console.log(goals_json_value1.weight[k].weight);
-        }
-        else {
-          total_month += 0;
-          //console.log(goals_json_value1.weight[j].date);
-          //console.log(month_cutoff.setDate(month_cutoff.getDate()+7));
-        }
-      }
-      var month_avg = (total_month / count_month).toFixed(1);
+            if(goals_json_value1.weight[k].date >= (m)){
+              total_month += goals_json_value1.weight[k].weight;
+              count_month += 1;
+              //console.log(count_month);
+              //console.log(goals_json_value1.weight[k].date);
+              //console.log(goals_json_value1.weight[k].weight);
+            }
+            else {
+              total_month += 0;
+              //console.log(goals_json_value1.weight[j].date);
+              //console.log(month_cutoff.setDate(month_cutoff.getDate()+7));
+            }
+          }
+          var month_avg = (total_month / count_month).toFixed(1);
 
-      //push weight summary stats to html
-      document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + week_avg + "</b>";
-      document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + month_avg +"</b>";
-      document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + all_time_avg +"</b>";
-      document.getElementById("weight_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
-      + wt_change_per_week +'/week'+ "</b>" ;
-      document.getElementById("cal_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
-      + cal_change_day +'/day'+ "</b>" ;
+          //push weight summary stats to html
+          document.getElementById("week_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + week_avg + "</b>";
+          document.getElementById("month_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + month_avg +"</b>";
+          document.getElementById("all_time_avg").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" + all_time_avg +"</b>";
+          document.getElementById("weight_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
+          + wt_change_per_week +'/week'+ "</b>" ;
+          document.getElementById("cal_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
+          + cal_change_day +'/day'+ "</b>" ;
 
-      
-      //google analytics
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-101352995-1', 'auto');
-      ga('send', 'pageview');
+          
+          //google analytics
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-101352995-1', 'auto');
+          ga('send', 'pageview');
