@@ -12,27 +12,26 @@ block content
     }
     });
     }
-  #welcome.container
-    br
-    h3 Sign Up
-    br
-  form.form-horizontal(id='signup-form', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='email') Email
-      .col-sm-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
-    .form-group
-      label.col-sm-3.control-label(for='password') Password
-      .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-    .form-group
-      label.col-sm-3.control-label(for='confirmPassword') Confirm Password
-      .col-sm-7
-        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
-    .form-group
+  .container
+    .row  
       #welcome.container
-        #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
+        br
+        h3 One. Two. Three. You're In.
+        br
+      #signup.col-sm-6.col-sm-offset-3
+        form.form-horizontal(id='signup-form', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-3.control-label(for='email')
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+          .form-group
+            label.col-sm-3.control-label(for='password')
+            input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+          .form-group
+            label.col-sm-3.control-label(for='confirmPassword')
+            input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+          #signup.form-group
+            #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
     script.
       function signup() {
       document.getElementById("signup-form").submit();

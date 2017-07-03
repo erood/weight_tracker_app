@@ -37,7 +37,7 @@ block content
                 label(type='hidden').col-sm-3.control-label(for='confirmPassword')
                 input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
               #signup.form-group
-                #login.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
+                #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
                 br
               br
               
@@ -202,7 +202,10 @@ block content
             var settings_goals_block = document.getElementById('goals_form');
             settings_goals_block.style.display = 'block';
             document.getElementById("start_here_goals").innerHTML +=
-            "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>";
+            "<p style='font-size:110%;line-height:1.5;color:#ff5722;font-weight:bold;'>" + 
+            'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>"+
+            "<p style='font-size:90%;line-height:1.5;'>" + 
+            "Don't want to track against a goal? Just select your units (lbs or kgs) and hit enter!"+"</p>";
             console.log("empty")
           }
           //console.log(goals_json_value1.goal);
@@ -625,16 +628,14 @@ block content
           })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
           ga('create', 'UA-101352995-1', 'auto');
           ga('send', 'pageview');
-          
-          //conversions
           // Google Code for Mescale Conversion Page
-        script(type='text/javascript').
           var google_conversion_id = 847551239;
           var google_conversion_language = "en";
           var google_conversion_format = "3";
           var google_conversion_color = "ffffff";
           var google_conversion_label = "XtG6CJLSx3IQh7aSlAM";
           var google_remarketing_only = false;
+        //conversions  
         script(type='text/javascript', src='//www.googleadservices.com/pagead/conversion.js')
         noscript
           div(style='display:inline;')
