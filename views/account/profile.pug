@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .page-header
-    h3 Profile Information
+    h4 Profile Information
 
   form.form-horizontal(action='/account/profile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -33,7 +33,7 @@ block content
           | Update Profile
 
   .page-header
-    h3 Change Password
+    h4 Change Password
 
   form.form-horizontal(action='/account/password', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -52,7 +52,7 @@ block content
           | Change Password
 
   .page-header
-    h3 Delete Account
+    h4 Delete Account
 
   form.form-horizontal(action='/account/delete', method='POST')
     .form-group
