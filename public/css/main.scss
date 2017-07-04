@@ -7,13 +7,17 @@
 
 // Scaffolding
 // -------------------------
-
-
 img {
-    border: #f5f5f5 !important;
-    border-style: solid !important;
-    border-width: 2px !important;
+  display: block;
+  margin: 0 auto;
+
 }
+
+//img {
+//    border: #f5f5f5 !important;
+//    border-style: solid !important;
+//    border-width: 2px !important;
+//}
 #landing.container{
   //background: #8dabff !important;
   //max-width: 85% !important;
