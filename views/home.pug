@@ -102,6 +102,12 @@ block content
             p.paragraph(style='font-size:110%;line-height:1.5')
               | Stats like weekly weight change, weight loss needed/week, and caloric deficit needed/week help keep your goals in view. We 
               | digest your weight information and turn it into beautiful summaries you can read at a glance.
+      #landing.container   
+        .row   
+          br
+          br  
+          #signup.form-group
+            #signup_button.btn.btn-md.btn-hover.btn-default(onclick="location.href='https://www.mescale.co/signup'") Track my weight!
 
   else
     head
@@ -192,9 +198,7 @@ block content
             bar.animate(progress_goal_stat);  // Number from 0.0 to 1.0
             //console.log(goal_weight.value)
             //console.log((goals_json_value1.weight[0].weight))
-            //console.log(goal_weight.value)
-            //console.log(start_weight.value)
-            //console.log(progress_goal_stat)
+
               }
                 }
           else{
@@ -232,11 +236,6 @@ block content
           /*weight piece*/
           //gettting json values
           var weight = document.getElementById("enter_weight_actual");
-          //var date = document.getElementById("entry_date");
-          //need count in here to take the last value entered in goals
-          //enter_goals.value = goals_json_value1[0].enter_goals;
-          //console.log(weights_json_value1[0].weight)
-          ////***console.log(goals_json_value1.weight[0].weight);
           //default entry date to show today
           var offset = new Date().getTimezoneOffset();
           var date_stg1 = new Date();// gmt+2, == -120 (minutes)
@@ -486,11 +485,40 @@ block content
               name: "Weight",
               type: "scatter",
             };
-
+          
+            var selectorOptions = {
+              buttons: [{
+                  step: 'month',
+                  stepmode: 'backward',
+                  count: 1,
+                  label: '1m'
+              }, {
+                  step: 'month',
+                  stepmode: 'backward',
+                  count: 6,
+                  label: '6m'
+              }, {
+                  step: 'year',
+                  stepmode: 'todate',
+                  count: 1,
+                  label: 'YTD'
+              }, {
+                  step: 'year',
+                  stepmode: 'backward',
+                  count: 1,
+                  label: '1y'
+              }, {
+                  step: 'all',
+              }],
+          };
+          
           var data = [trace_0,trace_1];
 
           var layout = {
             xaxis: {
+              rangeselector: selectorOptions,
+              //rangeslider looks pretty cool but not sure it's useful
+              //rangeslider: {},
               type: 'date',
               title: 'Date',
               showgrid: false,
