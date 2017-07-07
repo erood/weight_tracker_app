@@ -22,9 +22,10 @@ block content
       .container
         .row
           #welcome.container
-            h2 Weight tracking, simplified.
+            .col-md-6.col-md-offset-3
+              h3 Simple and free weight tracking.
+              #subline.h4 See results with goal management, weight statistics, and an interactive progress chart.
           #signup.col-sm-4.col-sm-offset-4
-            br
             form.form-horizontal(id='signup-form', action='/signup', method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
               .form-group
@@ -105,7 +106,7 @@ block content
       #landing.container
         br
         br  
-        img.img-fluid(src='https://erood.github.io/Utils/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#ddd;border-style: solid !important;border-width: 2px !important;')
+        img.img-fluid(src='https://erood.github.io/Utils/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:120%; height:auto;border:#ddd;border-style: solid !important;border-width: 2px !important;')
         
       #landing.container   
         .row   
@@ -580,6 +581,7 @@ block content
           var count_1 = Object.keys(goals_json_value1.goal).length;
           var goal_stg = (goals_json_value1.goal[count_1-1].goal_weight)
           var goal_date_stg = (goals_json_value1.goal[count_1-1].goal_date)
+          var units = (goals_json_value1.goal[count_1-1].weight_units)
           var current_weight = goals_json_value1.weight[0].weight
           var rightNow = new Date();
           var res = rightNow.toISOString().slice(0,10);
@@ -592,7 +594,16 @@ block content
           var wt_change_per_week = (Math.round((current_weight - goal_stg)/((nbDays)/7)*100).toFixed(2))/100
 
           //***cal change/day to hit goal***//
-          var cal_change_day = Math.round((wt_change_per_week*3500)/7)
+          var cal_change_day = 0
+          //for some reason if/else is crapping out here -- running two if statements instead  
+          if(units=='kg'){
+            //1 lb = .454 kg
+            var cal_change_day = Math.round((wt_change_per_week*(1/.454)*3500)/7)
+          }
+          if(units=='lbs'){ 
+            var cal_change_day = Math.round((wt_change_per_week*3500)/7)
+          }
+          
           
           ////***7 day (week) moving average//***
 
