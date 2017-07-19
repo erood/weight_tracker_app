@@ -42,6 +42,11 @@ img {
   max-width: 85% !important;
 }
 
+p.paragraph span {
+  //capacity to highlight more in landing page is here
+  background-color: #d6ffd8 !important;
+
+}
 .home__subline span {
     //white-space: nowrap;
     background-color: #d6ffd8;
@@ -116,7 +121,7 @@ input:-webkit-autofill:hover{
     overflow-y: auto !important;
 }
 body{
-  background-color: #f9f9f9 !important;
+  background-color: #fff !important;
   color: #404040 !important;
 }
 h1, h2, h3, h4, h5, h6,

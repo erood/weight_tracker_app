@@ -39,7 +39,11 @@ block content
                 input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
               #signup.form-group
                 #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
+              p.paragraph(style='text-align:center;')
+                | Already a user?
                 br
+                |
+                a(href='http://www.erikrood.com/') Log in here
               br
               
         #landing.container   
@@ -49,8 +53,13 @@ block content
               #landing.h3.subheading
                 | Set a goal, see progress
               p.paragraph(style='font-size:110%;line-height:1.5')
-                | Let us know if you want to gain, lose, or maintain weight. 
-                
+                | Let us know if you want to 
+                span gain
+                | , 
+                span lose
+                |, or 
+                span maintain
+                |  weight. 
                 | We'll guide your progress through visuals and summary statistics.
                 br
                 br
@@ -92,17 +101,27 @@ block content
           .col-md-6
             br  
             #landing.h3.subheading
-              | Log quickly, log anywhere
+              | Available everywhere
             p.paragraph(style='font-size:110%;line-height:1.5')
-              | Dieting is difficult enough, logging your weight shouldn't be. Mescale provides a fast, clean, simple interface on both desktop and mobile.
+              | No need to install another app on your phone. Mescale was designed from the ground up to work great on both 
+              span desktop
+              |  and 
+              span mobile
+              |. 
 
           .col-md-6
             br
             #landing.h3.subheading
               | Let us do the math
             p.paragraph(style='font-size:110%;line-height:1.5')
-              | Stats like weekly weight change, weight loss needed/week, and caloric deficit needed/week help keep your goals in view. We 
-              | digest your weight information and turn it into beautiful summaries you can read at a glance.
+              | Stats like 
+              span weekly weight change
+              |, 
+              span weight loss needed/week
+              |, and 
+              span caloric deficit needed/week
+              |  help keep your goals in sight. 
+              | We digest your weight information and turn it into beautiful summaries you can read at a glance.
       #landing.container
         br
         br  
@@ -416,7 +435,8 @@ block content
         h4 Progress chart (interactive)
         br
         //this is where the plotly chart will sit
-        .div(id="tester", style="min-width:100%")
+        .div(id="tester")
+          //style="min-width:100%"
         .container
           #lead_row.row
             span#chart_display_prompt.Price_num(style='', <='', span='')
