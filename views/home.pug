@@ -571,13 +571,15 @@ block content
               title:'Weight trend'
             };
           //>4 records to display chart (otherwise it's pretty meaningless + axis looks screwy)
-          if(goals_json_value1.weight.length>4){
+          if(goals_json_value1.weight.length>2){
             Plotly.plot( TESTER, data, layout)
             console.log('plotting')
           }
               else{
+              Plotly.plot( TESTER, data, layout)
+              console.log('plotting with warning')
               document.getElementById("chart_display_prompt").innerHTML +=
-              "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log 5 or more weights and your interactive progress chart will appear here.'+"</p>";
+              "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log a few weights to get this chart looking pretty! You can filter, zoom, download using buttons above.'+"</p>";
             }
 
         br
@@ -684,6 +686,8 @@ block content
           + wt_change_per_week +'/week'+ "</b>" ;
           document.getElementById("cal_rate_needed").innerHTML += "&nbsp&nbsp;" + "<b style='color:#2196f3;line-height:3'>" 
           + cal_change_day +'/day'+ "</b>" ;
+
+
 
           
           //google analytics
