@@ -34,7 +34,7 @@ block content
               .form-group
                 label(type='hidden').col-sm-3.control-label(for='password')
                 input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-              .form-group
+              //.form-group
                 label(type='hidden').col-sm-3.control-label(for='confirmPassword')
                 input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
               #signup.form-group
@@ -237,7 +237,7 @@ block content
             "<p style='font-size:110%;line-height:1.5;color:#ff5722;font-weight:bold;'>" + 
             'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>"+
             "<p style='font-size:90%;line-height:1.5;'>" + 
-            "Don't want to track against a goal? Just select your units (lbs or kgs) and hit enter!"+"</p>";
+            "Don't want to track against a goal? Just select your units (lbs or kgs) and click 'Update Goals'!"+"</p>";
             console.log("empty")
           }
           //console.log(goals_json_value1.goal);
@@ -582,7 +582,7 @@ block content
               Plotly.plot( TESTER, data, layout)
               console.log('plotting with warning')
               document.getElementById("chart_display_prompt").innerHTML +=
-              "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log a few weights to get this chart looking pretty! You can filter, zoom, download using buttons above.'+"</p>";
+              "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log a few weights to get this chart looking pretty! You can filter, zoom, and download using buttons above.'+"</p>";
             }
 
         br
