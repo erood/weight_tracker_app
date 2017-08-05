@@ -23,7 +23,7 @@ block content
         .row
           #welcome.container
             .col-sm-4.col-sm-offset-4
-              h3 Weight tracking, simplified.
+              h3 Free and simple weight tracking.
               //#subline.h4 See results with goal management, weight statistics, and an interactive progress chart.
           #signup.col-sm-4.col-sm-offset-4
             form.form-horizontal(id='signup-form', action='/signup', method='POST')
@@ -103,11 +103,14 @@ block content
             #landing.h3.subheading
               | Available everywhere
             p.paragraph(style='font-size:110%;line-height:1.5')
-              | No need to install another app on your phone. Mescale was designed from the ground up to work great on both 
+              | No need to install another app on your phone. Log your weight through 
               span desktop
-              |  and 
+              |  , 
               span mobile
+              |  , or 
+              span text message
               |. 
+
 
           .col-md-6
             br
@@ -122,7 +125,7 @@ block content
               span caloric deficit needed/week
               |  help keep your goals in sight. 
               | We digest your weight information and turn it into beautiful summaries you can read at a glance.
-      #landing.container
+      //#landing.container
         br
         br  
         img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#2196f3;border-style: solid !important;border-width: thin !important;')
