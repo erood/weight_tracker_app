@@ -18,123 +18,122 @@ block content
       }
       });
       }
-    .row
-      .container
-        .row
-          #welcome.container
-            .col-sm-4.col-sm-offset-4
-              h3 Free and simple weight tracking.
-              //#subline.h4 See results with goal management, weight statistics, and an interactive progress chart.
-          #signup.col-sm-4.col-sm-offset-4
-            form.form-horizontal(id='signup-form', action='/signup', method='POST')
-              input(type='hidden', name='_csrf', value=_csrf)
-              .form-group
-                label(type='hidden').col-sm-3.control-label(for='email')
-                input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
-              .form-group
-                label(type='hidden').col-sm-3.control-label(for='password')
-                input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-              //.form-group
-                label(type='hidden').col-sm-3.control-label(for='confirmPassword')
-                input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
-              #signup.form-group
-                #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
-              p.paragraph(style='text-align:center;')
-                | Already a user?
-                br
-                |
-                a(href='https://www.mescale.co/login') Log in here
+    .container(style='width=100%')
+      .row
+        #welcome.container
+          .col-sm-4.col-sm-offset-4
+            h3 Free and simple weight tracking.
+            //#subline.h4 See results with goal management, weight statistics, and an interactive progress chart.
+        #signup.col-sm-4.col-sm-offset-4
+          form.form-horizontal(id='signup-form', action='/signup', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+              label(type='hidden').col-sm-3.control-label(for='email')
+              input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+            .form-group
+              label(type='hidden').col-sm-3.control-label(for='password')
+              input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+            //.form-group
+              label(type='hidden').col-sm-3.control-label(for='confirmPassword')
+              input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+            #signup.form-group
+              #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
+            p.paragraph(style='text-align:center;')
+              | Already a user?
               br
-              
-        #landing.container   
-          .row      
-            .col-md-6
-        
-              #landing.h3.subheading
-                | Set a goal, see progress
-              p.paragraph(style='font-size:110%;line-height:1.5')
-                | Let us know if you want to 
-                span gain
-                | , 
-                span lose
-                |, or 
-                span maintain
-                |  weight. 
-                | We'll guide your progress through visuals and summary statistics.
-                br
-                br
-              img.img-fluid(src='/mescale_scale.png', alt='Mescale', style='max-width:50%;height:auto;border:none;text-align: center;')  
-            .col-md-6
-              br
-              br
-              img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#5e6469;border-style: solid !important;border-width: 2px !important;')
-
-              //h3.subheading
-                | Instant Handles
-              //p.paragraph
-                | Naming your brand has never been soooo easy! With Launchaco you can instantly search for twitter, facebook, medium, and instagram handles.
-      .container
-        .row
-          //#welcome.container
-            br
-            img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:95%; height:auto;')
-          #subline.container
-            br
-            br
-            br  
-            br
-          
-            p.home__subline
-              span Quick entry
-              | ,
               |
-              span analytics
-              | , and
-              |
-              span goal management
-              |  help you stay on track.
-      #landing.container   
-        .row   
-          br  
-          br
-          .col-md-6
-            br  
-            #landing.h3.subheading
-              | Available everywhere
-            p.paragraph(style='font-size:110%;line-height:1.5')
-              | No need to install another app on your phone. Log your weight through 
-              span desktop
-              |  , 
-              span mobile
-              |  , or 
-              span text message
-              |. 
-
-
-          .col-md-6
+              a(href='https://www.mescale.co/login') Log in here
             br
-            #landing.h3.subheading
-              | Let us do the math
-            p.paragraph(style='font-size:110%;line-height:1.5')
-              | Stats like 
-              span weekly weight change
-              |, 
-              span weight loss needed/week
-              |, and 
-              span caloric deficit needed/week
-              |  help keep your goals in sight. 
-              | We digest your weight information and turn it into beautiful summaries you can read at a glance.
-      //#landing.container
-        br
-        br  
-        img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#2196f3;border-style: solid !important;border-width: thin !important;')
-        
-      #landing.container   
-        .row   
+    hr        
+    #landing.container   
+      .row      
+        .col-md-6
+    
+          #landing.h3.subheading
+            | Set a goal, see progress
+          p.paragraph(style='font-size:110%;line-height:1.5')
+            | Let us know if you want to 
+            span gain
+            | , 
+            span lose
+            |, or 
+            span maintain
+            |  weight. 
+            | We'll guide your progress through visuals and summary statistics.
+            br
+            br
+          img.img-fluid(src='/mescale_scale.png', alt='Mescale', style='max-width:50%;height:auto;border:none;text-align: center;')  
+        .col-md-6
           br
+          br
+          img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#5e6469;border-style: solid !important;border-width: 2px !important;')
+
+          //h3.subheading
+            | Instant Handles
+          //p.paragraph
+            | Naming your brand has never been soooo easy! With Launchaco you can instantly search for twitter, facebook, medium, and instagram handles.
+    hr            
+    .container
+      .row
+        //#welcome.container
+          br
+          img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:95%; height:auto;')
+        #subline.container
+          br
+          br
+          p.home__subline
+            span Quick entry
+            | ,
+            |
+            span analytics
+            | , and
+            |
+            span goal management
+            |  help you stay on track.
+    hr        
+    #landing.container   
+      .row   
+        .col-md-6
           br  
-          #signup.form-group
-            #signup_button.btn.btn-md.btn-hover.btn-default(onclick="location.href='https://www.mescale.co/signup'") Track my weight!
+          #landing.h3.subheading
+            | Available everywhere
+          p.paragraph(style='font-size:110%;line-height:1.5')
+            | No need to install another app on your phone. Log your weight through 
+            span desktop
+            |  , 
+            span mobile
+            |  , or 
+            span text message
+            |. 
+          br  
+          img.img-fluid(src='/phone_browser_text.png', alt='Mescale', style='max-width:70%; height:auto; margin-left:auto !important;')
+
+
+
+        .col-md-6
+          br
+          #landing.h3.subheading
+            | Let us do the math
+          p.paragraph(style='font-size:110%;line-height:1.5')
+            | Stats like 
+            span weekly weight change
+            |, 
+            span weight loss needed/week
+            |, and 
+            span caloric deficit needed/week
+            |  help keep your goals in sight. 
+            | We digest your weight information and turn it into beautiful summaries you can read at a glance.
+    //#landing.container
+      br
+      br  
+      img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#2196f3;border-style: solid !important;border-width: thin !important;')
+    br
+    hr  
+    #landing.container   
+      .row   
+        br      
+        #signup.form-group
+          #signup_button.btn.btn-md.btn-hover.btn-default(onclick="location.href='https://www.mescale.co/signup'") Track my weight!
 
   else
     head
