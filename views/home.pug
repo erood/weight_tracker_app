@@ -1,29 +1,13 @@
 extends layout
-
 block content
   //if not signed up, show landing page
   //if signed up, show key stats on home page
   if !user
-    script.
-      function signup() {
-      document.getElementById("signup-form").submit();
-      }
-      window.onload = function start(){
-      //allow submitting with enter key - Signup Form
-      $('#signup-form').keydown(function(e) {
-      var key = e.which;
-      if (key == 13) {
-      // As ASCII code for ENTER key is "13"
-      document.getElementById("signup-form").submit();
-      }
-      });
-      }
     .container(style='width=100%')
       .row
         #welcome.container
           .col-sm-4.col-sm-offset-4
             h3 Free and simple weight tracking.
-            //#subline.h4 See results with goal management, weight statistics, and an interactive progress chart.
         #signup.col-sm-4.col-sm-offset-4
           form.form-horizontal(id='signup-form', action='/signup', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
@@ -33,9 +17,6 @@ block content
             .form-group
               label(type='hidden').col-sm-3.control-label(for='password')
               input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-            //.form-group
-              label(type='hidden').col-sm-3.control-label(for='confirmPassword')
-              input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
             #signup.form-group
               #signup_button.btn.btn-md.btn-hover.btn-default(onclick='signup()') Sign Up
             p.paragraph(style='text-align:center;')
@@ -48,7 +29,6 @@ block content
     #landing.container   
       .row      
         .col-md-6
-    
           #landing.h3.subheading
             | Set a goal, see progress
           p.paragraph(style='font-size:110%;line-height:1.5')
@@ -67,17 +47,9 @@ block content
           br
           br
           img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#5e6469;border-style: solid !important;border-width: 2px !important;')
-
-          //h3.subheading
-            | Instant Handles
-          //p.paragraph
-            | Naming your brand has never been soooo easy! With Launchaco you can instantly search for twitter, facebook, medium, and instagram handles.
     hr            
     .container
       .row
-        //#welcome.container
-          br
-          img(src='http://erikrood.com/Utils/mescale_weight.png', class='img-fluid', alt='Mescale', style='max-width:95%; height:auto;')
         #subline.container
           br
           br
@@ -107,9 +79,6 @@ block content
             |. 
           br  
           img.img-fluid(src='/phone_browser_text.png', alt='Mescale', style='max-width:70%; height:auto; padding-right:8px !important;')
-
-
-
         .col-md-6
           br
           #landing.h3.subheading
@@ -123,10 +92,6 @@ block content
             span caloric deficit needed/week
             |  help keep your goals in sight. 
             | We digest your weight information and turn it into beautiful summaries you can read at a glance.
-    //#landing.container
-      br
-      br  
-      img.img-fluid(src='/mescale_landing_gif_july_compress.gif', alt='Mescale', style='max-width:100%; height:auto;border:#2196f3;border-style: solid !important;border-width: thin !important;')
     br
     hr  
     #landing.container   
@@ -134,202 +99,25 @@ block content
         br      
         #signup.form-group
           #signup_button.btn.btn-md.btn-hover.btn-default(onclick="location.href='https://www.mescale.co/signup'") Track my weight!
-
+    script.
+      function signup() {
+      document.getElementById("signup-form").submit();
+      }
+      window.onload = function start(){
+      //allow submitting with enter key - Signup Form
+      $('#signup-form').keydown(function(e) {
+      var key = e.which;
+      if (key == 13) {
+      // As ASCII code for ENTER key is "13"
+      document.getElementById("signup-form").submit();
+      }
+      });
+      }
   else
     head
-      //jquery
-      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-      //moment
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js')
-
-      //functions
-      script(type='text/javascript').
-        var CSRF_HEADER = 'x-csrf-token';
-        function change_table() {
-          /*goal piece*/
-          //gettting json values
-          var goals_json = document.getElementById("goals_json").value;
-          var goals_json_value1 = JSON.parse(goals_json);
-          //console.log(goals_json_value1.goal)
-          var enter_goals = document.getElementById("enter_goals");
-          var goal_start = document.getElementById("goal_start");
-          var goal_weight = document.getElementById("goal_weight");
-          var start_weight = document.getElementById("start_weight");
-          var goal_date = document.getElementById("goal_date");
-          var units = document.getElementById('weight_units');
-
-          //need count in here to take the last value entered in goals
-          var count = Object.keys(goals_json_value1.goal).length;
-          var weight_count = Object.keys(goals_json_value1.weight).length;
-          console.log(weight_count)
-          if(count != 0){
-          goal_start.value = (goals_json_value1.goal[count-1].goal_start)//.substring(0,10);
-          goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
-          start_weight.value = goals_json_value1.goal[count-1].start_weight;
-          goal_date.value = goals_json_value1.goal[count-1].goal_date;
-          units.value = goals_json_value1.goal[count-1].weight_units;
-          //progress = (goal-current - index 0 since sorted already)/(goal-start)
-          if(weight_count != 0) {
-            //global goal weight for line chart etc
-            //set progress % var
-            var progress_goal_stat = 1-(Math.abs((goal_weight.value)-(goals_json_value1.weight[0].weight))/Math.abs((goal_weight.value)-(start_weight.value)))
-
-            //push goal progress update below progress bar
-            document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" +
-            "<p style='font-size:110%;line-height:1.5'>" + 
-            
-            "<span style='background-color:#d6ffd8;color:#333;'>"+
-            (Math.round(progress_goal_stat * 100) + '%')+"</span>"+ 
-            ' to goal weight of '+ 
-            
-            "<span style='background-color:#d6ffd8;color:#333;'>"+goal_weight.value+
-            units.value+"</span>"+
-            
-            ', based on most recent weight of '+
-            "<span style='background-color:#d6ffd8;color:#333;'>"+goals_json_value1.weight[0].weight+units.value+"</span>"+
-            
-            '.'+"</p>";
-
-            //update #progresscontainer bar
-            var bar = new ProgressBar.Line(progress_container, {
-            strokeWidth: 4,
-            easing: 'easeInOut',
-            duration: 1600,
-            color: '#2196f3',
-            trailColor: '#eee',
-            trailWidth: 1,
-            svgStyle: {width: '100%', height: '100%'},
-            text: {
-            style: {
-            // Text color.
-            // Default: same as stroke color (options.color)
-            color: '#2196f3',
-            position: 'relative',
-            right: '0',
-            top: '30px',
-            padding: 0,
-            margin: 0,
-            transform: null
-            },
-            autoStyleContainer: false
-            },
-            from: {color: '#FFEA82'},
-            to: {color: '#ED6A5A'},
-            step: (state, bar) => {
-            bar.setText(Math.round(bar.value() * 100) + '%');
-            }
-            });
-            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-            bar.text.style.fontSize = '2rem';
-            bar.animate(progress_goal_stat);  // Number from 0.0 to 1.0
-            //console.log(goal_weight.value)
-            //console.log((goals_json_value1.weight[0].weight))
-
-              }
-                }
-          else{
-            //if goals are empty open the block and prompt user to enter
-            var settings_goals_block = document.getElementById('goals_form');
-            settings_goals_block.style.display = 'block';
-            document.getElementById("start_here_goals").innerHTML +=
-            "<p style='font-size:110%;line-height:1.5;color:#ff5722;font-weight:bold;'>" + 
-            'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>"+
-            "<p style='font-size:90%;line-height:1.5;'>" + 
-            "Don't want to track against a goal? Just select your units (lbs or kgs) and click 'Update Goals'!"+"</p>";
-            console.log("empty")
-          }
-          //console.log(goals_json_value1.goal);
-          if(jQuery("label[for='start_weight_label']").html('Start Weight'+' ('+units.value+'):') != undefined){
-            jQuery("label[for='start_weight_label']").html('Start Weight'+' ('+units.value+'):');
-          }
-          else {
-            jQuery("label[for='start_weight_label']").html('Start Weight')
-          }
-
-          if(jQuery("label[for='goal_weight_label']").html('Goal Weight'+' ('+units.value+'):') != undefined){
-            jQuery("label[for='goal_weight_label']").html('Goal Weight'+' ('+units.value+'):')
-          }
-          else {
-            jQuery("label[for='goal_weight_label']").html('Goal Weight:')
-          }
-          //Weight label form
-          jQuery("label[for='weight_label']").html('Weight'+' ('+units.value+'):');
-          //console.log(goals_json_value1.goal)
-
-        };
-
-        function change_weight() {
-          /*weight piece*/
-          //gettting json values
-          var weight = document.getElementById("enter_weight_actual");
-          //default entry date to show today
-          var offset = new Date().getTimezoneOffset();
-          var date_stg1 = new Date();// gmt+2, == -120 (minutes)
-          var date_stg2 = date_stg1 + Math.abs(offset*60000)
-          var date_stg3 = new Date(date_stg2)
-          date_stg3.setDate(date_stg3.getDate());
-
-          console.log(date_stg3)
-          document.getElementById("entry_date").valueAsDate = date_stg3
-        };
-
-        window.onload = function start(){
-
-            change_table();
-            change_weight();
-
-            //allow submitting with enter key - Goals Form
-            $('#goals_form').keydown(function(e) {
-            var key = e.which;
-            if (key == 13) {
-            // As ASCII code for ENTER key is "13"
-            document.getElementById("goals_form").submit();
-            }
-            });
-
-
-            //allow submitting with enter key - Weight Form
-            $('#weight_form').keydown(function(e) {
-            var key = e.which;
-            if (key == 13) {
-            // As ASCII code for ENTER key is "13"
-            document.getElementById("weight_form").submit();
-            }
-            });
-
-            //if goals blank, will need to run goal_show_hide() and prompt to enter goals
-            //goal_show_hide();
-        };
-
-        function goal_show_hide() {
-          var x = document.getElementById('goals_form');
-          if (x.style.display === 'none') {
-          x.style.display = 'block';
-          } else {
-          x.style.display = 'none';
-            }
-          }
-        function settings_show_hide() {
-          var x = document.getElementById('settings_form');
-          if (x.style.display === 'none') {
-          x.style.display = 'block';
-          } else {
-          x.style.display = 'none';
-            }
-          }
-        function enter_goals() {
-          document.getElementById("goals_form").submit();
-
-        }
-        function enter_weight() {
-        document.getElementById("weight_form").submit();
-        }
-
-
     //************************************************************//    
-    //************************Begin pug**************************//
+    //************************Pug********************************//
     //***********************************************************//
-    
     br
     br
     //just remove this and bump indent out 2 levels to stretch whole screen  
@@ -369,7 +157,6 @@ block content
           .form-group
             .col-sm-offset-3.col-sm-4
               #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
-
         br
         hr  
         h4 Enter weight
@@ -396,17 +183,13 @@ block content
           a(href='https://www.mescale.co/logbooks') Logbook.
         hr    
         h4 Progress to goal
-        #progress_container
-          //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
-          script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
-            
+        #progress_container        
         br
         br
         br
         .container
           #lead_row.row
             span#goal_progress_update.Price_num(style='', <='', span='')
-
         br
         hr
         h4 Summary statistics
@@ -433,7 +216,6 @@ block content
               span(style='font-size:120%;')   Calorie deficit/surplus needed to hit goal:
               br
               span#cal_rate_needed(style='font-size:110%;', <='', span='')
-
         br
         br
         hr
@@ -446,12 +228,199 @@ block content
           #lead_row.row
             span#chart_display_prompt.Price_num(style='', <='', span='')
         
-        
-        
-        
         //**************************************************************************//
         //********************************SCRIPTS***********************************//
         //**************************************************************************//
+        
+        //jquery
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        //moment
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js')
+        //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js')
+        //functions
+        script(type='text/javascript').
+          var CSRF_HEADER = 'x-csrf-token';
+          function change_table() {
+            /*goal piece*/
+            //gettting json values
+            var goals_json = document.getElementById("goals_json").value;
+            var goals_json_value1 = JSON.parse(goals_json);
+            //console.log(goals_json_value1.goal)
+            var enter_goals = document.getElementById("enter_goals");
+            var goal_start = document.getElementById("goal_start");
+            var goal_weight = document.getElementById("goal_weight");
+            var start_weight = document.getElementById("start_weight");
+            var goal_date = document.getElementById("goal_date");
+            var units = document.getElementById('weight_units');
+
+            //need count in here to take the last value entered in goals
+            var count = Object.keys(goals_json_value1.goal).length;
+            var weight_count = Object.keys(goals_json_value1.weight).length;
+            console.log(weight_count)
+            if(count != 0){
+            goal_start.value = (goals_json_value1.goal[count-1].goal_start)//.substring(0,10);
+            goal_weight.value = goals_json_value1.goal[count-1].goal_weight;
+            start_weight.value = goals_json_value1.goal[count-1].start_weight;
+            goal_date.value = goals_json_value1.goal[count-1].goal_date;
+            units.value = goals_json_value1.goal[count-1].weight_units;
+            //progress = (goal-current - index 0 since sorted already)/(goal-start)
+            if(weight_count != 0) {
+              //global goal weight for line chart etc
+              //set progress % var
+              var progress_goal_stat = 1-(Math.abs((goal_weight.value)-(goals_json_value1.weight[0].weight))/Math.abs((goal_weight.value)-(start_weight.value)))
+
+              //push goal progress update below progress bar
+              document.getElementById("goal_progress_update").innerHTML += "&nbsp&nbsp;" +
+              "<p style='font-size:110%;line-height:1.5'>" + 
+              
+              "<span style='background-color:#d6ffd8;color:#333;'>"+
+              (Math.round(progress_goal_stat * 100) + '%')+"</span>"+ 
+              ' to goal weight of '+ 
+              
+              "<span style='background-color:#d6ffd8;color:#333;'>"+goal_weight.value+
+              units.value+"</span>"+
+              
+              ', based on most recent weight of '+
+              "<span style='background-color:#d6ffd8;color:#333;'>"+goals_json_value1.weight[0].weight+units.value+"</span>"+
+              
+              '.'+"</p>";
+
+              //update #progresscontainer bar
+              var bar = new ProgressBar.Line(progress_container, {
+              strokeWidth: 4,
+              easing: 'easeInOut',
+              duration: 1600,
+              color: '#2196f3',
+              trailColor: '#eee',
+              trailWidth: 1,
+              svgStyle: {width: '100%', height: '100%'},
+              text: {
+              style: {
+              // Text color.
+              // Default: same as stroke color (options.color)
+              color: '#2196f3',
+              position: 'relative',
+              right: '0',
+              top: '30px',
+              padding: 0,
+              margin: 0,
+              transform: null
+              },
+              autoStyleContainer: false
+              },
+              from: {color: '#FFEA82'},
+              to: {color: '#ED6A5A'},
+              step: (state, bar) => {
+              bar.setText(Math.round(bar.value() * 100) + '%');
+              }
+              });
+              bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+              bar.text.style.fontSize = '2rem';
+              bar.animate(progress_goal_stat);  // Number from 0.0 to 1.0
+              //console.log(goal_weight.value)
+              //console.log((goals_json_value1.weight[0].weight))
+
+                }
+                  }
+            else{
+              //if goals are empty open the block and prompt user to enter
+              var settings_goals_block = document.getElementById('goals_form');
+              settings_goals_block.style.display = 'block';
+              document.getElementById("start_here_goals").innerHTML +=
+              "<p style='font-size:110%;line-height:1.5;color:#ff5722;font-weight:bold;'>" + 
+              'Start here - save a goal to track against (lose, gain, or maintain weight).'+"</p>"+
+              "<p style='font-size:90%;line-height:1.5;'>" + 
+              "Don't want to track against a goal? Just select your units (lbs or kgs) and click 'Update Goals'!"+"</p>";
+              console.log("empty")
+            }
+            //console.log(goals_json_value1.goal);
+            if(jQuery("label[for='start_weight_label']").html('Start Weight'+' ('+units.value+'):') != undefined){
+              jQuery("label[for='start_weight_label']").html('Start Weight'+' ('+units.value+'):');
+            }
+            else {
+              jQuery("label[for='start_weight_label']").html('Start Weight')
+            }
+
+            if(jQuery("label[for='goal_weight_label']").html('Goal Weight'+' ('+units.value+'):') != undefined){
+              jQuery("label[for='goal_weight_label']").html('Goal Weight'+' ('+units.value+'):')
+            }
+            else {
+              jQuery("label[for='goal_weight_label']").html('Goal Weight:')
+            }
+            //Weight label form
+            jQuery("label[for='weight_label']").html('Weight'+' ('+units.value+'):');
+            //console.log(goals_json_value1.goal)
+
+          };
+
+          function change_weight() {
+            /*weight piece*/
+            //gettting json values
+            var weight = document.getElementById("enter_weight_actual");
+            //default entry date to show today
+            var offset = new Date().getTimezoneOffset();
+            var date_stg1 = new Date();// gmt+2, == -120 (minutes)
+            var date_stg2 = date_stg1 + Math.abs(offset*60000)
+            var date_stg3 = new Date(date_stg2)
+            date_stg3.setDate(date_stg3.getDate());
+
+            console.log(date_stg3)
+            document.getElementById("entry_date").valueAsDate = date_stg3
+          };
+
+          window.onload = function start(){
+
+              change_table();
+              change_weight();
+
+              //allow submitting with enter key - Goals Form
+              $('#goals_form').keydown(function(e) {
+              var key = e.which;
+              if (key == 13) {
+              // As ASCII code for ENTER key is "13"
+              document.getElementById("goals_form").submit();
+              }
+              });
+
+
+              //allow submitting with enter key - Weight Form
+              $('#weight_form').keydown(function(e) {
+              var key = e.which;
+              if (key == 13) {
+              // As ASCII code for ENTER key is "13"
+              document.getElementById("weight_form").submit();
+              }
+              });
+
+              //if goals blank, will need to run goal_show_hide() and prompt to enter goals
+              //goal_show_hide();
+          };
+
+          function goal_show_hide() {
+            var x = document.getElementById('goals_form');
+            if (x.style.display === 'none') {
+            x.style.display = 'block';
+            } else {
+            x.style.display = 'none';
+              }
+            }
+          function settings_show_hide() {
+            var x = document.getElementById('settings_form');
+            if (x.style.display === 'none') {
+            x.style.display = 'block';
+            } else {
+            x.style.display = 'none';
+              }
+            }
+          function enter_goals() {
+            document.getElementById("goals_form").submit();
+
+          }
+          function enter_weight() {
+          document.getElementById("weight_form").submit();
+          }
+
         
         //plotly import, no account needed!
         script(src='https://cdn.plot.ly/plotly-latest.min.js')
@@ -586,9 +555,6 @@ block content
               document.getElementById("chart_display_prompt").innerHTML +=
               "<p style='font-size:110%;line-height:1.5;color:#ff5722'>" + 'Log a few weights to get this chart looking pretty! You can filter, zoom, and download using buttons above.'+"</p>";
             }
-
-        br
-        br
 
         //***weight summary stats//***
         script.
