@@ -371,8 +371,7 @@ block content
               #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_goals()') Update Goals
 
         br
-        br
-        br
+        hr  
         h4 Enter weight
         br
         br
@@ -390,7 +389,12 @@ block content
             .col-sm-offset-3.col-sm-4
               #submit.btn.btn-md.btn-hover.btn-default(onclick='enter_weight()') Enter Weight
         br
-        br
+        br  
+        p.paragraph
+          | To view/delete past entries, visit the
+          |
+          a(href='https://www.mescale.co/logbooks') Logbook.
+        hr    
         h4 Progress to goal
         #progress_container
           //import progressbar -- docs: https://kimmobrunfeldt.github.io/progressbar.js/
@@ -404,6 +408,7 @@ block content
             span#goal_progress_update.Price_num(style='', <='', span='')
 
         br
+        hr
         h4 Summary statistics
         br
         .container
@@ -431,8 +436,7 @@ block content
 
         br
         br
-        br
-        br
+        hr
         h4 Progress chart (interactive)
         br
         //this is where the plotly chart will sit
