@@ -76,6 +76,7 @@ block content
         //************************************************************//    
         //************************Scripts****************************//
         //***********************************************************//
+        //pulling the data into main table
         script(type='text/javascript').
           var goals_json = document.getElementById("goals_json").value;
           var goals_json_value1 = JSON.parse(goals_json);
@@ -93,6 +94,7 @@ block content
             $('table').append(tr);
           }
           });
+        //allow deletion of rows  
         script(type='text/javascript').
           function deleteRow2(obj) {
             var index = obj.parentNode.parentNode.rowIndex;
